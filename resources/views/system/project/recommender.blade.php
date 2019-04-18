@@ -120,17 +120,52 @@
                 </div>
             </div><!-- row -->
 
+            <script>
+            function output(){
+	            //https://www.w3schools.com/php/php_ajax_php.asp
+                //https://stackoverflow.com/questions/24468459/sending-a-json-to-server-and-retrieving-a-json-in-return-without-jquery
+	            //https://stackoverflow.com/questions/18441375/submit-form-field-values-to-a-javascript-function
+                var xmlhttp = new XMLHttpRequest();
+                var input = document.getElementById("topicin").value;
+	            xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var text = null;
+                        text = this.responseText;
+                        text = JSON.parse(text);
+                        var output = "Highly matched topics is: \n";
+                        if(text != null){
+                            var t = text.topics;
+                            console.dir(t[0]);
+                            for (var i = 0; i < t.length; i++){
+                                    var detail = t[i];
+                                    //console.dir(t[i]);
+                                    output = output.concat('   TOPIC ', detail.id, ' : ', detail.summary, ' \n');
+                                    output = output.concat('      SUGGESTED TOOLS: ', detail.tools, ' \n');
+                                    output = output.concat('      SUGGESTED DATASETS: ', detail.datasets, '||\n');
 
+                            }
+                        }
+                        document.getElementById("output").innerHTML = output;
+                    }
+                };
+                var text = JSON.stringify({"text": input});
+                xmlhttp.open("POST", "http://localhost:9000/api/topics", true);
+                xmlhttp.setRequestHeader("Content-Type", "application/json");
+                xmlhttp.send(text);
+            }
+            </script> 
             <div class="row justify-content-lg-center"  ng-show="content == 'fourth'">
                 <div class="col-md-10 ">
-                    <form>
+                    <form method="POST" action="http://localhost:9000/api/topics">
                         <div class="form-group">
 
                             <label for="topicin">topic input</label>
                             <input type="text" class="form-control" id="topicin" aria-describedby="topicHelp" placeholder="Enter topic">
-                            <small id="topicHelp" class="form-text text-muted">the number x reuquired xxxx.</small>
                             </br>
-                            <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+                            <p>Output</p>
+                            <span id="output"></span>
+                            </br>
+                            <button type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
 
                         </div>
                     </form>
