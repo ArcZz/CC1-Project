@@ -2,6 +2,7 @@
 @section('css')
 
     <link href="{{ asset('jscss/custom/chatbot/chatbot.css') }}" rel="stylesheet">
+
 @endsection
 @section('content')
 
@@ -78,6 +79,7 @@
 
                     <form action="{{ url("/project/pubrec") }}" method="post">
                         {{ csrf_field() }}
+
                         <div class="form-group">
 
 

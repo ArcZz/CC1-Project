@@ -6,7 +6,9 @@ from tornado.ioloop import IOLoop
 import json
 import sys
 import numpy
-sys.path.append('/Users/Gtt/Desktop/CC1-Project/Topic Model')
+sys.path.append('/Applications/XAMPP/xamppfiles/htdocs/CC1-Project/pymodel')
+
+
 from api import *
 from urllib.parse import *
 topics = []

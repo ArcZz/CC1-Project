@@ -25,6 +25,7 @@ Route::get('/', 'System\HomeController@homePage')->name('system.home');
 Route::get('/project/home', 'System\Project\TaskController@homePage')->name('system.project.home');
 Route::get('/project/rs', 'System\Project\TaskController@recommenderPage')->name('system.project.recommender');
 
+
 //Project-Publication
 Route::get('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
 Route::post('/project/pubrec', 'System\Project\TaskController@pubmedtest')->name('system.project.pubRec');
