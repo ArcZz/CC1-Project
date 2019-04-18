@@ -65,9 +65,7 @@
                             <small id="juHelp" class="form-text text-muted">the number x reuquired xxxx.</small>
                             </br>
                             <button type="submit" class="btn btn-primary ">Confirm</button>
-                            <button class="btn btn-primary ">
-                                <i class="fa fa-spinner fa-spin"></i> Loading
-                            </button>
+
                         </div>
                     </form>
                 </div>
@@ -85,14 +83,14 @@
 
                             <label for="pubin">Publication Recommender System input</label>
                             <label for="putype">Type</label>
-                            <select class="form-control" id="putype">
+                            <select class="form-control" id="putype" name ="putype">
                                 <option>Articles</option>
                                 <option>Artists</option>
 
                             </select>
                         </br>
 
-                            <input type="text" class="form-control" id="pubin" aria-describedby="pubHelp" placeholder="Enter number">
+                            <input type="text" class="form-control" name="pubin" id="pubin" aria-describedby="pubHelp" placeholder="Enter number">
                             <small id="pubHelp" class="form-text text-muted">the number x reuquired xxxx.</small>
                             </br>
                             <button type="submit" class="btn btn-primary">Confirm</button>
@@ -296,9 +294,7 @@
 @endsection
 @section('javascript')
 
-    <script>
 
-    </script>
 
 
 

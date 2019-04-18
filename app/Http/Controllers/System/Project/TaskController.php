@@ -20,10 +20,13 @@ class TaskController extends Controller
     }
     public function pubmedtest(Request $request) {
 
-        $input=$request->all();
+        $name = $request->input('pubin');
+        $type = $request->input('putype');
 
 
-        return view('system/project/publication',['number' => $input]);
+        return view('system/project/publication',
+            ['number' => $name, 'type' => $type
+            ]);
     }
 
 

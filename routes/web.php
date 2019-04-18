@@ -27,7 +27,7 @@ Route::get('/project/rs', 'System\Project\TaskController@recommenderPage')->name
 
 //Project-Publication
 Route::get('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
-Route::post('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
+Route::post('/project/pubrec', 'System\Project\TaskController@pubmedtest')->name('system.project.pubRec');
 
 
 // About
