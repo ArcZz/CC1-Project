@@ -29,6 +29,8 @@ Route::get('/project/rs', 'System\Project\TaskController@recommenderPage')->name
 Route::get('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
 Route::post('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
 
+//Project-Jupyter
+Route::get('/project/jupyter', 'System\Project\TaskController@jupyterRecNotebook')->name('system.project.jupRec');
 
 // About
 Route::get('/system/about/participants', 'System\About\ParticipantsController@ParticipantsPage')->name('system.about.participants');
@@ -92,3 +94,4 @@ Route::get('/system/analytics/workflow_get_job_parameters', 'System\Analytics\Wo
       3 => "Steven"
     );
 });
+*/
