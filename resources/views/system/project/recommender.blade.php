@@ -58,15 +58,15 @@
 
             <div class="row justify-content-lg-center"  ng-show="content == 'first'">
                 <div class="col-md-10 ">
-                    <form>
+                    <form action="{{ url("/project/jupyter") }}" method="get">
+                        {{ csrf_field() }}
                         <div class="form-group">
 
-                            <label for="juin">Jupyter Notebook input</label>
-                            <input type="text" class="form-control" id="juin" aria-describedby="juHelp" placeholder="Enter ju">
-                            <small id="juHelp" class="form-text text-muted">the number x reuquired xxxx.</small>
+                            <label for="juin">Jupyter Notebook Input</label>
+                            <input type="text" name="jupInput" class="form-control" id="juin" aria-describedby="juHelp" placeholder="Enter a keyword">
+                            <!--<small id="juHelp" class="form-text text-muted">the number x reuquired xxxx.</small>-->
                             </br>
                             <button type="submit" class="btn btn-primary ">Confirm</button>
-
                         </div>
                     </form>
                 </div>

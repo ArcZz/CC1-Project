@@ -27,6 +27,8 @@ Route::get('/system/recommender/home', 'System\Recommender\RecomController@homeP
 Route::get('/system/recommender/recommender', 'System\Recommender\RecomController@recommender')->name('system.recommender.recommender');
 Route::get('/system/recommender/template_recommender', 'System\Recommender\TempRecomController@template_recommender')->name('system.recommender.template_recommender');
 
+//Project-Jupyter
+Route::get('/project/jupyter', 'System\Project\TaskController@jupyterRecNotebook')->name('system.project.jupRec');
 
 // About
 Route::get('/system/about/participants', 'System\About\ParticipantsController@ParticipantsPage')->name('system.about.participants');
@@ -82,4 +84,3 @@ Route::get('/system/analytics/api_workflow_job_submit', 'System\Analytics\Workfl
 Route::get('/system/analytics/workflow_get_job_list', 'System\Analytics\WorkflowController@workflow_get_job_list')->name('system.analytics.workflow_get_job_list');
 
 Route::get('/system/analytics/workflow_get_job_parameters', 'System\Analytics\WorkflowController@workflow_get_job_parameters')->name('system.analytics.workflow_get_job_parameters');
-
