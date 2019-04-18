@@ -166,18 +166,10 @@
                         Jupyter Notebook Recommenders:
                     </h4>
                     <p>
-                        This workflow will guide you through requirements gathering, execution, and visualization of a
-                        single neural simulation. It involves following steps and each step will be accomplished by a
-                        corresponding app.
+                        This workflow will guide you through requirements for selecting and finding a jupyter notebook.
                     </p>
                     <dl> The input requires:
-                        <dt>Collecting length</dt>
-                        <dd>Collecting Soma length & diameter.</dd>
-                        <dd>Collecting Dendri length</dd>
-                        <dt>Choose Channels</dt>
-                        <dd>Selecting Sodium, Potassium and Calcium.</dd>
-                        <dt>Choosing voltage and current</dt>
-                        <dd>Membrane voltage and current.</dd>
+                        <dt>a keyword for the search engine</dt>
                     </dl>
                 </div>
             </div><!-- row -->
