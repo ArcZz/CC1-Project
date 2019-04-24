@@ -6,8 +6,9 @@ from tornado.ioloop import IOLoop
 import json
 import sys
 import numpy
-sys.path.append('/Applications/XAMPP/xamppfiles/htdocs/CC1-Project/pymodel')
-
+import os
+# sys.path.append('/Applications/XAMPP/xamppfiles/htdocs/CC1-Project/pymodel')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from api import *
 from urllib.parse import *
