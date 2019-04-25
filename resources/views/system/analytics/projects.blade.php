@@ -13,24 +13,6 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<h4 style="display: inline-block;">Recommender System</h4>
-				<a class="badge badge-warning" href="{{route('system.project.home')}}">Click Here</a> <span class="badge badge-danger">New</span>
-
-				<p style="text-align: justify;">
-					To integrate chatbot with underlying recommender systems on CyNeuro application, fostering Neuroscience research <br>
-					Integrating following recommender systems with the chatbot.<br> Jupyter Notebook Recommender Publication Recommender Topic Model Cloud solution Template Recommender
-
-				</p>
-				<p style="text-align: justify;">
-
-
-				</p>
-			</div>
-		</div>
-		</br>
-		<hr class="hr-line">
-		<div class="row">
-			<div class="col-md-12">
 				<h4 style="display: inline-block;">Chatbot Driven Neuron Single Cell Simulation on CyNeuro Portal</h4> <a class="badge badge-warning" href="{{route('system.analytics.test')}}">Click Here</a> <span class="badge badge-danger">New</span>
 				<div class="demo-video">
   					<img style="width: 200px; height: 150px;" src="{{ asset('jscss/custom/img/VIDEO-SOON.png') }}"></img>
@@ -113,6 +95,47 @@
 				</p>
 				<p style="text-align: justify;">
 				The Jupyter notebooks help users to experiment with different parameters of image filters to analyze jaw movements. Such a design of notebooks allows a biologist who is a novice HPC user to easily conduct and customize high-throughput experimentation with remote HPC resources.
+				</p>
+			</div>
+		</div>
+		
+		
+		<!--<hr class="hr-line">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h4 style="display: inline-block;">Cloud solution Template Recommender</h4>
+					<a class="badge badge-warning" href="{{route('system.recommender.template_recommender')}}">Click Here</a> <span class="badge badge-danger">New</span>
+				<div class="demo-video ">
+  					<div class="">
+						<img style="width: 200px; height: 150px;" src="{{ asset('jscss/custom/img/VIDEO-SOON.png') }}"></img>
+					</div>
+				</div>
+				<p style="text-align: justify;">  
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+				<p style="text-align: justify;">
+				 
+				</p>
+			</div>
+		</div>
+		-->
+		<hr class="hr-line">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h4 style="display: inline-block;">Recommender System</h4>
+					<a class="badge badge-warning" href="{{route('system.recommender.recommender')}}">Click Here</a> <span class="badge badge-danger">New</span>
+				<div class="demo-video ">
+  					<div class="">
+						<img style="width: 200px; height: 150px;" src="{{ asset('jscss/custom/img/VIDEO-SOON.png') }}"></img>
+					</div>
+				</div>
+				<p style="text-align: justify;">  
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+				<p style="text-align: justify;">
+				 
 				</p>
 			</div>
 		</div>

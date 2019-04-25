@@ -21,15 +21,6 @@
 Route::get('/', 'System\HomeController@homePage')->name('system.home');
 
 
-// For Project
-Route::get('/project/home', 'System\Project\TaskController@homePage')->name('system.project.home');
-Route::get('/project/rs', 'System\Project\TaskController@recommenderPage')->name('system.project.recommender');
-
-
-//Project-Publication
-//Route::get('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
-Route::post('/project/pubrec', 'System\Project\TaskController@pubmedtest')->name('system.project.pubRec');
-
 // About
 Route::get('/system/about/participants', 'System\About\ParticipantsController@ParticipantsPage')->name('system.about.participants');
 Route::get('/system/about/publications', 'System\About\PublicationsController@PublicationsPage')->name('system.about.publications');
@@ -84,11 +75,7 @@ Route::get('/system/analytics/workflow_get_job_list', 'System\Analytics\Workflow
 
 Route::get('/system/analytics/workflow_get_job_parameters', 'System\Analytics\WorkflowController@workflow_get_job_parameters')->name('system.analytics.workflow_get_job_parameters');
 
-/*Route::get('/', function()
-{
-    return array(
-      1 => "John",
-      2 => "Mary",
-      3 => "Steven"
-    );
-});
+
+//template recommender system
+ Route::get('/system/recommender/recommender', 'System\Recommender\RecomController@recommender')->name('system.recommender.recommender');
+ Route::get('/system/recommender/template_recommender', 'System\Recommender\TempRecomController@template_recommender')->name('system.recommender.template_recommender');

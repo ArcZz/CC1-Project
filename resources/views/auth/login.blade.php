@@ -1,6 +1,8 @@
 @extends('system.layouts.header')
 
 @section('content')
+
+
 <section class="bg-light">
     <div class="container">
         <div class="row">
@@ -9,6 +11,12 @@
                 <hr class="hr-line">
             </div>
         </div>
+<?php
+	echo bcrypt('test');
+	
+	?>
+	
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">

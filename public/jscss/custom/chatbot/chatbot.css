@@ -301,3 +301,18 @@ when chat window is empty and user clicks on close button */
 .chatbox--empty .chatbox__credentials {
     display: block;
 }
+
+.recommender-left-menu .active{
+	background-color: #F1B82D;
+    border-color: #F1B82D;
+}
+
+.recommender-left-menu .list-group-item{
+	min-height: 55px;
+    width: 100%;
+    white-space: pre-wrap;
+    cursor: pointer;
+}
+.recommender-left-menu .list-group-item:focus{
+	 border-color: #F1B82D;
+}
