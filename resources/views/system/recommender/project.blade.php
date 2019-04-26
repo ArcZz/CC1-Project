@@ -12,7 +12,7 @@
                 </p><hr class="my-4">
                 <h5>Project Members:</h5>
                 <p> Ryan Lokugamage, Nijaporn Hotrabhavananda Yilong Zhang <br>Benjavicha Hotrabhavananda, Snigdha Pasham, Komal Vekaria <br> Zhang Zhi, Song Vu Nguyen, Aaron Thomas  <p></p>
-                <a class="btn btn-primary btn-lg" href="{{ route('system.project.recommender') }}" role="button">Learn more</a>
+                <a class="btn btn-primary btn-lg" href="{{ route('system.recommender.recommender') }}" role="button">Learn more</a>
             </div>
             <br>
 
@@ -21,7 +21,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <h3 class="section-heading">Recommender System</h3>
+                    <h3 class="section-heading">Project Info</h3>
                     <hr class="hr-line">
                 </div>
             </div>
@@ -36,21 +36,14 @@
 
 
                     </p>
-                    <h4>Project infos</h4>
+                    <h4>Recommender System</h4>
                     <p>A neuron is an electrically excitable cell that receives, processes, and transmits information
-                        through electrical and chemical signals. These signals between neurons occur via specialized
-                        connections called synapses. Neurons can connect to each other to form neural networks. Neurons
-                        are major components of the brain and spinal cord of the central nervous system, and of the
-                        autonomic ganglia of the peripheral nervous system.
 
 
                     </p>
-                    <h4>Group</h4>
+                    <h4>Group info</h4>
                     <p>A neuron is an electrically excitable cell that receives, processes, and transmits information
                         through electrical and chemical signals. These signals between neurons occur via specialized
-                        connections called synapses. Neurons can connect to each other to form neural networks. Neurons
-                        are major components of the brain and spinal cord of the central nervous system, and of the
-                        autonomic ganglia of the peripheral nervous system.
 
 
                     </p>

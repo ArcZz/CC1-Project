@@ -77,29 +77,7 @@
                 <div class="col-md-10 ">
 
 
-                    <form action="{{ url("/project/pubrec") }}" method="post">
-                        {{ csrf_field() }}
 
-                        <div class="form-group">
-
-
-                            <label for="pubin">Publication Recommender System input</label>
-                            <label for="putype">Type</label>
-                            <select class="form-control" id="putype" name ="putype">
-                                <option>Articles</option>
-                                <option>Artists</option>
-
-                            </select>
-                        </br>
-
-                            <input type="text" class="form-control" name="pubin" id="pubin" aria-describedby="pubHelp" placeholder="Enter number">
-                            <small id="pubHelp" class="form-text text-muted">the number x reuquired xxxx.</small>
-                            </br>
-                            <button type="submit" class="btn btn-primary">Confirm</button>
-
-
-                        </div>
-                    </form>
                 </div>
             </div><!-- row -->
 

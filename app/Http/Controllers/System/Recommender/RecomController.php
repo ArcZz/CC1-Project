@@ -26,7 +26,12 @@ class RecomController extends Controller {
       
     }
 
-   
+    //home page
+    public function homePage() {
+
+        return view('system/recommender/project');
+
+    }
 
     //test Route
     public function recommender() {

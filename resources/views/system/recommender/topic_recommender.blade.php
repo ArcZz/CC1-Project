@@ -36,7 +36,7 @@
    <div class="row">
       <div class="col-12">
          <h3 class="section-heading">Topic Model</h3>
-         <hr class="hr-line">
+         <hr>
       </div>
    </div>
    </div>
@@ -52,6 +52,11 @@
                <p style="text-align: justify;">
                   Data used in the topic model had been trained by parsing through publish scientific papers (mostly neuroscience and bioinformatics) and discover relationship between topics, tools, and datasets
                </p>
+
+
+
+         
+           
       </div>
       <div  class="col-md-12" id="secondSection">
             <form method="POST" action="http://localhost:9000/api/topics">
