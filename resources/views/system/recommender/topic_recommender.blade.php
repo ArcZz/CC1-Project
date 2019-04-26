@@ -39,11 +39,9 @@
          <hr>
       </div>
    </div>
-   </div>
    <div class="row"  >
       <div class="col-md-12">
-         <div class="row"  id="data-processing" >
-            <div  class="col-md-12" id="firstSection" ng-show="visibleSection && visibleSection=='firstpage'">
+            <div  class="col-md-12" id="firstSection">
                <h4 style="display: inline-block;">What is Topic Model Recommender?</h4>
                <p style="text-align: justify;">
                   Suggest relevant research topics as well as recommend tools and datasets for each topic based on user’s search term. Help guide researchers to get started on a research topics without having to look through large amount of information
@@ -51,12 +49,8 @@
                </p>
                <p style="text-align: justify;">
                   Data used in the topic model had been trained by parsing through publish scientific papers (mostly neuroscience and bioinformatics) and discover relationship between topics, tools, and datasets
-               </p>
-
-
-
-         
-           
+               </p>     
+            </div>
       </div>
       <div  class="col-md-12" id="secondSection">
             <form method="POST" action="http://localhost:9000/api/topics">
