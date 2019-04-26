@@ -188,7 +188,7 @@ $(document).ready(function() {
             	var suggestions = data.result.fulfillment.messages[1];
             }
         }
-		if(data.result.parameters && data.result.parameters.module_type && data.result.parameters.module_type == 'recommender_system'){
+		if(data.result.parameters && data.result.parameters.type_recommender){
 			if(data.result.parameters.type_recommender == 'Jupyter Notebook Recommender'){
 				$('#jupyter_recommender_link').click();
 			}
