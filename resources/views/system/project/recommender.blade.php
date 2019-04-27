@@ -67,6 +67,12 @@
                             <!--<small id="juHelp" class="form-text text-muted">the number x reuquired xxxx.</small>-->
                             </br>
                             <button type="submit" class="btn btn-primary ">Confirm</button>
+<<<<<<< HEAD
+=======
+                            <!-- <button class="btn btn-primary ">
+                                <i class="fa fa-spinner fa-spin"></i> Loading
+                            </button> -->
+>>>>>>> 6b17955e3f6efe55d167f49acdc807b9cdb55784
                         </div>
                     </form>
                 </div>
