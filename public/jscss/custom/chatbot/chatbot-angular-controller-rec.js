@@ -204,6 +204,8 @@ $(document).ready(function () {
             }
             else if (data.result.parameters.type_recommender == 'Topic Model') {
                 $('#topic_recommender_link').click();
+                recommenderView = 'topic-model';
+                setBotResponse("Type in the topic you want to research in the imput field");
             }
         }
 
@@ -253,8 +255,17 @@ $(document).ready(function () {
         }
         // -------------------------------------------------------------------------------------
 
-
-
+        
+        //Topic Model Recommender---------------------------------------------------------------
+        if (data.result.parameters.confirm == 'confirm' && recommenderView == 'topic-model' && data.result.resolvedQuery) {
+            $('#topic-confirm').click();
+        }
+        if (data.result.parameters.topic_input && recommenderView == 'topic-model' && data.result.resolvedQuery) {
+            $('#topicin').val(data.result.parameters.topic_input);
+            setBotResponse("Do you want to research about "+data.result.parameters.topic_input+ "?");
+        }
+        //----------------------------------------------------------------------------------------
+        
         switch (action) {
             // case 'your.action': // set in api.ai
             // Perform operation/json api call based on action

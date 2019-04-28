@@ -76,7 +76,7 @@
                      </div>
                </div>
                <div class="form-group row ">
-                  <button type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
+                  <button id="topic-confirm" type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
                </div>
             </form>
       </div>
