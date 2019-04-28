@@ -17,8 +17,9 @@
                 <label for="pubin">Publication Recommender System input</label>
                 <label for="putype">Type</label>
                 <select class="form-control" id="putype" name="putype">
-                    <option>Articles</option>
-                    <option>Artists</option>
+                    <option value="1">PMID</option>
+                    <option value="2">Title</option>
+                    <option value="3">Author</option>
 
                 </select>
                 </br>
@@ -27,7 +28,7 @@
                        placeholder="Enter number">
                 <small id="pubHelp" class="form-text text-muted">the number x reuquired xxxx.</small>
                 </br>
-                <button type="submit" class="btn btn-primary">Confirm</button>
+                <button id="publication-confirm-button" type="submit" class="btn btn-primary">Confirm</button>
 
 
             </div>
