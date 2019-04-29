@@ -111,6 +111,7 @@ app.get('/journal',(req,res)=>{
     })
 
 });
+
 //author
 app.get('/author',(req,res)=>{
     console.log("test");
@@ -129,16 +130,30 @@ app.get('/author',(req,res)=>{
 
 
 //
-app.post('/pmid',(req,res)=>{
-    let str = req.body.pmid;
-    console.log(req.body);
+// app.post('/pmid',(req,res)=>{
+//     let str = req.body.pmid;
+//     console.log(req.body);
+//     Articles.
+//     find().
+//     where('PMID').equals(str).
+//     exec((err,articles)=>{
+//     if(err) return res.status(400).send(err);
+//     res.send(articles);
+//     })
+// });
+
+app.get('/PMID/',(req,res)=>{
+    _id = req.query.id;
+    let str = _id;
+
     Articles.
     find().
     where('PMID').equals(str).
     exec((err,articles)=>{
-    if(err) return res.status(400).send(err);
-    res.send(articles);
+        if(err) return res.status(400).send(err);
+        res.send(articles);
     })
+
 });
 
 
