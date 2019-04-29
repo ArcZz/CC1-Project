@@ -107,6 +107,7 @@
 
                 }).fail(function (xhr, status, error) {
                     $("#resultID").after(error);
+                    $("#psload").remove();
                 });
 
             } else if (type == 2) {
