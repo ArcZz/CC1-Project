@@ -13,9 +13,8 @@
 
             <div class="form-group">
 
-
-                <label for="pubin">Publication Recommender System input</label>
-                <label for="putype">Type</label>
+                <label for="pubin">Input</label>
+                <label for="putype">Type:</label>
                 <select class="form-control" id="putype" name="putype">
                     <option value="1">PMID</option>
                     <option value="2">Title</option>
@@ -25,25 +24,14 @@
                 </br>
 
                 <input type="text" class="form-control" name="pubin" id="pubin" aria-describedby="pubHelp"
-                       placeholder="Enter number">
-                <small id="pubHelp" class="form-text text-muted">the number x reuquired xxxx.</small>
+                       placeholder='Please enter "PMID", "Title", or "Author"...'>
+{{--                <small id="pubHelp" class="form-text text-muted">the number x reuquired xxxx.</small>--}}
                 </br>
-                <button id="publication-confirm-button" type="submit" class="btn btn-primary">Confirm</button>
+                <button id="publication-confirm-button" type="submit" class="btn btn-primary" style="float: right;">Confirm</button>
 
 
             </div>
         </form>
-
-
-    {{--                    @php  echo '<h4>'.$type.'_API </h4>'; @endphp--}}
-    <!-- <h3 class="section-subheading"> -->
-        <p>In this work, we propose a new approach for discovering various relationships among keywords over the
-            scientific publications based on a Markov Chain model. It is an important problem since keywords are the
-            basic elements for representing abstract objects such as documents, user profiles, topics and many things
-            else. Our model is very effective since it combines four important factors in scientific publications:
-            content, publicity, impact and randomness. Particularly, a recommendation system (called SciRecSys) has been
-            presented to support users to efficiently find out relevant articles.</p>
-        <br>
 
         <div id="resultID">
             <h4 id="psload"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>
