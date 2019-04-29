@@ -27,30 +27,23 @@
             </div>
             <div class="row" style="display: block">
                 <div class="col-md-12">
+
                     <h4>Backgroud</h4>
-                    <p>A neuron is an electrically excitable cell that receives, processes, and transmits information
+                    <p>
+                        A neuron is an electrically excitable cell that receives, processes, and transmits information
                         through electrical and chemical signals. These signals between neurons occur via specialized
                         connections called synapses. Neurons can connect to each other to form neural networks. Neurons
                         are major components of the brain and spinal cord of the central nervous system, and of the
                         autonomic ganglia of the peripheral nervous system.
-
-
                     </p>
-                    <h4>Recommender System</h4>
-                    <p>A neuron is an electrically excitable cell that receives, processes, and transmits information
 
-
+                    <h4>Recommender Systems</h4>
+                    <p>
+                        Currently, there are four recommender systems integrate into CyNeuro Portal, i.e., Jupyter Notebook, Publication, Cloud Solution Template, and Topic Model recommender systems.
                     </p>
-                    <h4>Group info</h4>
-                    <p>A neuron is an electrically excitable cell that receives, processes, and transmits information
-                        through electrical and chemical signals. These signals between neurons occur via specialized
 
-
-                    </p>
                 </div>
             </div><!-- row -->
-
-
 
         </div> <!-- container -->
     </section>

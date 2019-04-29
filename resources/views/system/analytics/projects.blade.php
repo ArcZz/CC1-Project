@@ -14,8 +14,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h4 style="display: inline-block;">Chatbot Driven Neuron Single Cell Simulation on CyNeuro Portal</h4> <a class="badge badge-warning" href="{{route('system.analytics.test')}}">Click Here</a> <span class="badge badge-danger">New</span>
-				<div class="demo-video">
-  					<img style="width: 200px; height: 150px;" src="{{ asset('jscss/custom/img/VIDEO-SOON.png') }}"></img>
+				<div class="demo-video ">
+					<div class="">
+						<img style="width: 200px; height: 150px;" src="{{ asset('jscss/custom/img/VIDEO-SOON.png') }}"></img>
+					</div>
 				</div>
 				<p style="text-align: justify;">Guided user interface for simple single cell neuron simulation. The user will be navigated through a series of steps of simulation by a chatbot. At each step, the chatbot guides the user by providing useful information through a dialog relating to the simulation.
 				</p>
@@ -124,18 +126,14 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<h4 style="display: inline-block;">Recommender System</h4>
+				<h4 style="display: inline-block;">Chatbot Recommender Systems on CyNeuro Portal</h4>
 					<a class="badge badge-warning" href="{{route('system.recommender.home')}}">Click Here</a> <span class="badge badge-danger">New</span>
 				<div class="demo-video ">
   					<div class="">
 						<img style="width: 200px; height: 150px;" src="{{ asset('jscss/custom/img/VIDEO-SOON.png') }}"></img>
 					</div>
 				</div>
-				<p style="text-align: justify;">  
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<p style="text-align: justify;">
-				 
+				<p style="text-align: justify;">The guided user interfaces for four recommender systems were driven by a set of responsive/dynamic forms and a context-aware chatbot. This chatbot is context-aware, i.e., it responds to the user questions about the recommender systems. Users can navigate through the user interface screens of a recommender system, while simultaneously interacting with the chatbot. The chatbot is equipped to help the user enter the parameters that are needed to run their recommender systems, as necessary.
 				</p>
 			</div>
 		</div>

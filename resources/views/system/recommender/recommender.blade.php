@@ -9,28 +9,31 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h3 class="section-heading">Recommender Systems</h3>
+				<a style="color:black; background: transparent; border: none;" class="btn btn-primary btn-lg" href="{{ route('system.recommender.recommender') }}" role="button">
+					<h3 class="section-heading">Recommender Systems</h3>
+				</a>
 				<hr class="hr-line">
 			</div>
 		</div>
 		
 		<div class="row" ng-controller="recommender-workflow">
 		
-		   <div class="col-md-3 recommender-left-menu"   > 
+		   <div class="col-md-3 recommender-left-menu">
 			  <input type="submit" id="jupyter_recommender_link" ng-click="openRecommender('jupyter_recommender');" ng-class="classActive['jupyter_recommender']" class="list-group-item  text-center"
 				value ='Jupyter Notebook Recommender' />
-			  
-			   <input type="submit" id="publication_recommender_link" ng-click="$event.preventDefault();openRecommender('publication_recommender');" ng-class="classActive['publication_recommender']"  class="list-group-item text-center" 
+
+			   <input type="submit" id="publication_recommender_link" ng-click="$event.preventDefault();openRecommender('publication_recommender');" ng-class="classActive['publication_recommender']"  class="list-group-item text-center"
 				value="Publication Recommender" />
-			  
+
 			   <input type="submit" id="cloud_recommender_link" ng-click="$event.preventDefault();openRecommender('template_recommender');" ng-class="classActive['template_recommender']"   class="list-group-item text-center"
 				value="Cloud solution Template Recommender" />
-				
-			   <input type="submit" id="topic_recommender_link" ng-click="$event.preventDefault();openRecommender('topic_recommender');" ng-class="classActive['topic_recommender']"  class="list-group-item text-center" 
+
+			   <input type="submit" id="topic_recommender_link" ng-click="$event.preventDefault();openRecommender('topic_recommender');" ng-class="classActive['topic_recommender']"  class="list-group-item text-center"
 				value="Topic Model" />
 			  </a>
 		   </div>
-		   <div class="col-md-9"   >
+
+		   <div class="col-md-9">
 			  <div ng-show="recomm_section && recomm_section=='recommendersystems'">
 				 @include(' system.recommender.recommendersystems')
 			  </div>
