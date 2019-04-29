@@ -107,7 +107,6 @@
                         }
 
                         $("#w3-container").after("<h3 id='authorsHeader'>Related Articles:</h3>");
-
                         $("#psload").remove()
                     }
 
@@ -169,7 +168,10 @@
                     }
 
                 }).fail(function (xhr, status, error) {
-                    $("#resultID").after(error);
+                    console.log("Not found");
+                    $("#resultID").append('<p id="notFound">Not Found</p>');
+                    $("#panel1").remove();
+                    $("#psload").remove();
                 });
 
             } else if (type == 3) {
@@ -223,7 +225,10 @@
                     }
 
                 }).fail(function (xhr, status, error) {
-                    $("#resultID").after(error);
+                    console.log("Not found");
+                    $("#resultID").append('<p id="notFound">Not Found</p>');
+                    $("#panel1").remove();
+                    $("#psload").remove();
                 });
             }
 
