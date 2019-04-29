@@ -43,6 +43,7 @@
             $("#notFound").remove();
             $("#w3-container").remove();
             $("#panel1").remove();
+            $("#psload").remove();
 
             $("#resultID").append(' <div class="w3-container" id="w3-container"> </div>');
             $("#w3-container").append('<div class="w3-panel w3-card" id="panel1"></div>');
