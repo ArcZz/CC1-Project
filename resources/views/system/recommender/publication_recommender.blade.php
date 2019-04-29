@@ -40,6 +40,10 @@
 
         $('#myForm1').on('submit', function(event) {
 
+            $("#notFound").remove();
+            $("#w3-container").remove();
+            $("#panel1").remove();
+
             $("#resultID").append(' <div class="w3-container" id="w3-container"> </div>');
             $("#w3-container").append('<div class="w3-panel w3-card" id="panel1"></div>');
             $("#panel1").append('<h3 id="titleID"></h3>');
@@ -74,6 +78,8 @@
                         $("#authorID").empty();
                         $("#authorsHeader").remove();
                         $("#simID").empty();
+                        
+                        
 
                         $("#titleID").append('<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[0].PMID + '">' + data[0].Title + '</a>');
                         $("#PMID").append('<h5>'+ "PMID: " + '</h5>'+ data[0].PMID);
@@ -106,7 +112,9 @@
                     }
 
                 }).fail(function (xhr, status, error) {
-                    $("#resultID").after(error);
+                    console.log("Not found");
+                    $("#resultID").append('<p id="notFound">Not Found</p>');
+                    $("#panel1").remove();
                     $("#psload").remove();
                 });
 
