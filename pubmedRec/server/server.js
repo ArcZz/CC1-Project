@@ -10,7 +10,7 @@ require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.DATABASE);
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true } );
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -36,21 +36,49 @@ app.use(function(req, res, next) {
 // "Sim":["30792538","30794058","30568296","30787427","30755253","30206749","30651603","30705424","30622366","30617260","30778835","30729425","30705427","30694922","30647434","30631118","30610512","30465250","30450503","30361893","29405033","30705428","30637601","30503716","30048237","29663735","29469679","29415737","29405028","30761689","30760196","30722937","30707392","30688235","30680615","30672825","30661940","30654755","30643300","30634989","30604281","30604006","30541602","30427512","30207235","30101709","30089514","30089306","30079925","30007759","29959887","26829844","30793432","30789229","30776004","30773387","30766479","30748078","30719813","23732229"]}
 
 // Models
-const ArticleSchema = new mongoose.Schema({});
+const ArticleSchema = new mongoose.Schema({
+    Id : Number,
+    Abstract : String,
+    PMID : String,
+    Title : String,
+    Authors : [String],
+    Journal : String,
+    Label : String,
+    Sim : [String]
+
+});
 const ArtistsSchema = new mongoose.Schema({});
 
 const Articles = mongoose.model('articles', ArticleSchema, 'articles');
 // const Artists = mongoose.model('artists', ArticleSchema, 'artists');
 
 
+// sim id
 
+app.get('/sim',(req,res, next)=>{
+    _id = req.query.id;
+    let str = _id;
+    Articles.
+    find().
+    where('PMID').equals(str).
+    exec((err,articles)=>{
+        if(err) return res.status(400).send(err);
+        if (articles.length === 0){
+
+            res.send("no");
+        }else {
+            res.send(articles);
+        }
+    })
+
+
+});
 //api title serarch
 app.get('/title/',(req,res, next)=>{
     console.log("find");
     _id = req.query.id;
     let str = _id;
     let result;
-    console.log(_id);
     const reg = new RegExp(str, 'i')
     Articles.
     find(
@@ -69,32 +97,48 @@ app.get('/title/',(req,res, next)=>{
 
 
 });
-// author search
+
+
+
 app.get('/authors/',(req,res, next)=>{
-    console.log("find");
+
     _id = req.query.id;
     let str = _id;
-    let result;
-    console.log(_id);
+    let result = [];
     const reg = new RegExp(str, 'i')
     Articles.
     find(
         {Authors : {$regex : reg}}
     ).
-    limit(10).
+    limit(1).
     exec((err,articles)=>{
         if(err) return res.status(400).send(err);
         if (articles.length === 0){
 
             res.send("no");
         }else {
-            res.send(articles);
+            var data = articles[0];
+
+            console.log(data);
+            result = articles[0]["Sim"];
+            Articles.
+            find({
+                PMID: { $in: result } }).
+            limit(10).
+            exec((err,articles)=>{
+                if(err) return res.status(400).send(err);
+                if (articles.length === 0){
+
+                    res.send("no");
+                }else {
+                    res.send(data+ articles);
+                }
+            })
         }
     })
 
 
 });
-
 
 //Journal
 
@@ -130,6 +174,7 @@ app.get('/author',(req,res)=>{
 
 
 //
+<<<<<<< Updated upstream
 // app.post('/pmid',(req,res)=>{
 //     let str = req.body.pmid;
 //     console.log(req.body);
@@ -146,12 +191,42 @@ app.get('/PMID/',(req,res)=>{
     _id = req.query.id;
     let str = _id;
 
+=======
+app.post('/pmid',(req,res)=>{
+    let str = req.body.pmid;
+    console.log(req.body.pmid);
+>>>>>>> Stashed changes
     Articles.
     find().
     where('PMID').equals(str).
     exec((err,articles)=>{
         if(err) return res.status(400).send(err);
+<<<<<<< Updated upstream
         res.send(articles);
+=======
+        if (articles.length === 0){
+
+            res.send("no");
+        }else {
+            var data = articles[0];
+
+            console.log(data);
+            result = articles[0]["Sim"];
+            Articles.
+            find({
+                PMID: { $in: result } }).
+            limit(10).
+            exec((err,articles)=>{
+                if(err) return res.status(400).send(err);
+                if (articles.length === 0){
+
+                    res.send("no");
+                }else {
+                    res.send(data+ articles);
+                }
+            })
+        }
+>>>>>>> Stashed changes
     })
 
 });
