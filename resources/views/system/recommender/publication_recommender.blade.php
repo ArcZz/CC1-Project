@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <div class="row">
     <div class="col-12">
         <h3 class="section-heading">Publication Recommender</h3>
@@ -8,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form method="post" id="myForm1">
+        <form method="post" id="myFormSearch">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="pubin">Input</label>
@@ -22,7 +25,7 @@
                 <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="pubHelp"
                        placeholder='Please enter "PMID", "Title", or "Author"...'>
                 </br>
-                <button id="publication-confirm-button" type="submit" class="btn btn-primary" style="float: right;">Confirm</button>
+                <button id="publication-confirm-button" type="submit" class="btn btn-primary" style="float: right;">Submit</button>
             </div>
         </form>
 
@@ -31,210 +34,131 @@
     </div>
 </div>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
 <script>
+
     $(document).ready(function () {
 
-        $('#myForm1').on('submit', function(event) {
+        $('#myFormSearch').on('submit', function(event) {
 
-            $("#notFound").remove();
-            $("#w3-container").remove();
-            $("#panel1").remove();
-            $("#psload").remove();
-
-            $("#resultID").append(' <div class="w3-container" id="w3-container"> </div>');
-            $("#w3-container").append('<div class="w3-panel w3-card" id="panel1"></div>');
-            $("#panel1").append('<h3 id="titleID"></h3>');
-            $("#panel1").append('<p id="authorID"></p>');
-            $("#panel1").append('<p id="abstractID"></p>');
-            $("#panel1").append('<p id="PMID"></p>');
-
-
+            $('#resultID').empty();
 
             event.preventDefault();
             var type = $("#putype").val();
-            var inputVal = $("#searchInput").val();
+            var searchKey = $("#searchInput").val();
             var url;
+
+            $("#resultID").append(' <div class="w3-container" id="w3-container"> </div>');
+
 
             if (type == 1) {
 
-                url = "http://localhost:3002/PMID?id=" + inputVal;
+                url = "http://localhost:3002/PMID?id=" + searchKey;
 
                 $.ajax({
                     type: 'GET',
                     url: url,
                     dataType: 'JSON',
                     beforeSend: function() {
-                        $("#myForm1").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
+                        $("#myFormSearch").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
                     },
                     success: function (data) {
-                        console.log(data[0]);
+                        if (data[0] != undefined) {
+                            $("#w3-container").append('<div class="w3-panel w3-card" id="w3-card-outer"></div>');
+                            $("#w3-card-outer").append('<h3 style="color: #4C4CFF;"  id="titleID"></h3>');  // 1
+                            $("#w3-card-outer").append('<p id="authorID"></p>');   // 2
+                            $("#w3-card-outer").append('<p id="abstractID"></p>'); // 3
+                            $("#w3-card-outer").append('<p id="PMID"></p>');       // 4
 
-                        $("#titleID").empty();
-                        $("#PMID").empty();
-                        $("#abstractID").empty();
-                        $("#authorID").empty();
-                        $("#authorsHeader").remove();
-                        $("#simID").empty();
-                        
-                        
+                            console.log(data[0]); // DEBUG
 
-                        $("#titleID").append('<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[0].PMID + '">' + data[0].Title + '</a>');
-                        $("#PMID").append('<h5>'+ "PMID: " + '</h5>'+ data[0].PMID);
-                        $("#abstractID").append('<h5>'+ 'Abstract: ' + '</h5>'+ data[0].Abstract);
+                            // 1
+                            $("#titleID").append('<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[0].PMID + '">' + data[0].Title + '</a>');
 
+                            // 2
+                            $("#authorID").append('<h5>'+ "Author(s): " + '</h5>');
+                            for (var i = 0; i < data[0].Authors.length - 1; i++) {
+                                $("#authorID").append(data[0].Authors[i] + ', ');
+                            }
+                            $("#authorID").append(data[0].Authors[i]);
 
-                        $("#authorID").append('<h5>'+ "Author(s): " + '</h5>');
-                        for (var i = 0; i < data[0].Authors.length - 1; i++) {
-                            $("#authorID").append(data[0].Authors[i] + ', ');
+                            //3
+                            $("#abstractID").append('<h5>'+ 'Abstract: ' + '</h5>'+ data[0].Abstract);
+
+                            // 4
+                            $("#PMID").append('<h5>'+ "PMID: " + '</h5>'+ data[0].PMID);
+
+                            for (var i = 0; i < 10; i++) {
+
+                                var PMID = data[0].Sim[i];
+                                url = "http://localhost:3002/PMID?id=" + PMID;
+
+                                $.ajax({
+                                    type: 'GET',
+                                    url: url,
+                                    dataType: 'JSON',
+                                    // beforeSend: function() {
+                                    //     $("#myFormSearch").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
+                                    // },
+                                    success: function (data) {
+
+                                        //     $("#psload").remove();
+
+                                        console.log(data[0]); // DEBUG
+
+                                        $("#w3-container").after(' <div class="w3-container" id="w3-container-inner"> </div>');
+                                        $("#w3-container-inner").append('<div class="w3-panel w3-card" id="w3-card-inner"></div>');
+                                        $("#w3-card-inner").append('<h3 style="color: #4C4CFF;" id="titleID-inner"></h3>');  // 1
+                                        $("#w3-card-inner").append('<p id="authorID-inner"></p>');   // 2
+                                        $("#w3-card-inner").append('<p id="abstractID-inner"></p>'); // 3
+                                        $("#w3-card-inner").append('<p id="PMID-inner"></p>');       // 4
+
+                                        // 1
+                                        $("#titleID-inner").append('<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[0].PMID + '">' + data[0].Title + '</a>');
+
+                                        // 2
+                                        $("#authorID-inner").append('<h5>'+ "Author(s): " + '</h5>');
+                                        for (var i = 0; i < data[0].Authors.length - 1; i++) {
+                                            $("#authorID-inner").append(data[0].Authors[i] + ', ');
+                                        }
+                                        $("#authorID-inner").append(data[0].Authors[i]);
+
+                                        //3
+                                        $("#abstractID-inner").append('<h5>'+ 'Abstract: ' + '</h5>'+ data[0].Abstract);
+
+                                        // 4
+                                        $("#PMID-inner").append('<h5>'+ "PMID: " + '</h5>'+ data[0].PMID);
+                                    }
+
+                                }).fail(function (xhr, status, error) {
+                                    $('#resultID').empty();
+                                    $("#resultID").append('<br><br><div style="text-align:center;" id="notFound">Not Found</div>');
+                                });
+
+                            }
+
+                        } else {
+                            $('#resultID').empty();
+                            $("#resultID").append('<br><br><div style="text-align:center;" id="notFound">Not Found</div>');
                         }
-                        $("#authorID").append(data[0].Authors[i]);
-
-                        for (var i = 0; i < 10; i++) {
-                            var PMID = data[0].Sim[i];
-
-                            $("#w3-container").after(
-
-                                ' <div class="w3-container" id="w3-container">' +
-                                ' <div class="w3-panel w3-card">' + ' <a href="https://www.ncbi.nlm.nih.gov/pubmed/' + PMID + '" target="_blank">' +
-                                + PMID +
-                                '</a>' +
-                                '</div> ' +
-                                '</div>'
-                            );
-                        }
-
-                        $("#w3-container").after("<h3 id='authorsHeader'>Related Articles:</h3>");
-                        $("#psload").remove()
+                        $("#psload").remove();
                     }
 
                 }).fail(function (xhr, status, error) {
-                    console.log("Not found");
-                    $("#resultID").append('<p id="notFound">Not Found</p>');
-                    $("#panel1").remove();
-                    $("#psload").remove();
+                    $('#resultID').empty();
+                    $("#resultID").append('<br><br><div style="text-align:center;" id="notFound">Not Found</div>');
                 });
 
             } else if (type == 2) {
 
-                url = "http://localhost:3002/title?id=" + inputVal;
-
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    dataType: 'JSON',
-                    beforeSend: function() {
-                        $("#myForm1").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
-                    },
-                    success: function (data) {
-                        console.log(data[0]);
-
-                        $("#titleID").empty();
-                        $("#PMID").empty();
-                        $("#abstractID").empty();
-                        $("#authorID").empty();
-                        $("#authorsHeader").remove();
-                        $("#simID").empty();
-
-                        $("#titleID").append('<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[0].PMID + '">' + data[0].Title + '</a>');
-                        $("#PMID").append("PMID: " + data[0].PMID);
-                        $("#abstractID").append('Abstract: ' + data[0].Abstract);
-
-
-                        $("#authorID").before("<h3 id='authorsHeader'>Author(s): </h3>");
-                        for (var i = 0; i < data[0].Authors.length; i++) {
-                            $("#authorID").append('<li>' + data[0].Authors[i] + '</li>');
-                        }
-
-                        for (var i = 0; i < 10; i++) {
-                            var PMID = data[0].Sim[i];
-
-                            $("#w3-container").after(
-
-                                ' <div class="w3-container" id="w3-container">' +
-                                ' <div class="w3-panel w3-card">' + ' <a href="https://www.ncbi.nlm.nih.gov/pubmed/' + PMID + '" target="_blank">' +
-                                + PMID +
-                                '</a>' +
-                                '</div> ' +
-                                '</div>'
-                            );
-                        }
-
-                        $("#w3-container").after("<h3 id='authorsHeader'>Related Articles:</h3>");
-
-                        $("#psload").remove()
-                    }
-
-                }).fail(function (xhr, status, error) {
-                    console.log("Not found");
-                    $("#resultID").append('<p id="notFound">Not Found</p>');
-                    $("#panel1").remove();
-                    $("#psload").remove();
-                });
+                url = "http://localhost:3002/title?id=" + searchKey
 
             } else if (type == 3) {
 
-                url = "http://localhost:3002/authors?id=" + inputVal;
-
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    dataType: 'JSON',
-                    beforeSend: function() {
-                        $("#myForm1").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
-                    },
-                    success: function (data) {
-                        console.log(data[0]);
-
-                        $("#titleID").empty();
-                        $("#PMID").empty();
-                        $("#abstractID").empty();
-                        $("#authorID").empty();
-                        $("#authorsHeader").remove();
-                        $("#simID").empty();
-
-                        $("#titleID").append('<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[0].PMID + '">' + data[0].Title + '</a>');
-                        $("#PMID").append("PMID: " + data[0].PMID);
-                        $("#abstractID").append('Abstract: ' + data[0].Abstract);
-
-
-                        $("#authorID").before("<h3 id='authorsHeader'>Author(s): </h3>");
-                        for (var i = 0; i < data[0].Authors.length; i++) {
-                            $("#authorID").append('<li>' + data[0].Authors[i] + '</li>');
-                        }
-
-                        for (var i = 0; i < 10; i++) {
-                            var PMID = data[0].Sim[i];
-
-                            $("#w3-container").after(
-
-                                ' <div class="w3-container" id="w3-container">' +
-                                ' <div class="w3-panel w3-card">' + ' <a href="https://www.ncbi.nlm.nih.gov/pubmed/' + PMID + '" target="_blank">' +
-                                + PMID +
-                                '</a>' +
-                                '</div> ' +
-                                '</div>'
-                            );
-                        }
-
-                        $("#w3-container").after("<h3 id='authorsHeader'>Related Articles:</h3>");
-
-                        $("#psload").remove()
-                    }
-
-                }).fail(function (xhr, status, error) {
-                    console.log("Not found");
-                    $("#resultID").append('<p id="notFound">Not Found</p>');
-                    $("#panel1").remove();
-                    $("#psload").remove();
-                });
+                url = "http://localhost:3002/authors?id=" + searchKey
             }
 
         });
+
     });
 
 </script>
-

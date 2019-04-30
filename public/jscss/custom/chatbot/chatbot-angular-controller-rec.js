@@ -174,6 +174,19 @@ $(document).ready(function () {
 
     // To check which recommender view is displaying
     var recommenderView = '';
+    $("#publication_recommender_link").click(function(){
+        recommenderView = 'publication';
+    });
+    $("#jupyter_recommender_link").click(function(){
+        recommenderView = 'jupyter';
+    });
+    $("#cloud_recommender_link").click(function(){
+        recommenderView = 'cloud';
+    });
+    $("#topic_recommender_link").click(function(){
+        recommenderView = 'topic';
+    });
+
 
     // Main function: this method has the logic to handle differen parts of the response returned from the chat server
     function main(data) {
@@ -209,8 +222,7 @@ $(document).ready(function () {
             }
         }
 
-        // Publication Recommender ------------------------------------------------------------
-
+        // Publication Recommender -----------------------------------------------------------------------------------------------
         if (data.result.resolvedQuery && data.result.metadata.intentName === "publication") {
             if (recommenderView !== 'publication') {
                 setBotResponse("Navigated to Publication Recommender");
@@ -236,11 +248,11 @@ $(document).ready(function () {
         if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_search_input") {
             if (data.result.parameters.PMID) {
                 setBotResponse("You selected: " + data.result.parameters.PMID);
-                $('#pubin').val(data.result.parameters.PMID);
+                $('#searchInput').val(data.result.parameters.PMID);
             }
             if (data.result.parameters.any) {
                 setBotResponse("You selected: " + data.result.parameters.any);
-                $('#pubin').val(data.result.parameters.any);
+                $('#searchInput').val(data.result.parameters.any);
             }
             setBotResponse('Type in the PMID, title, or author name you wish to search:');
             // or type 'CONFIRM' to see the result.
