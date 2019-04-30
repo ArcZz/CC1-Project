@@ -172,21 +172,25 @@ $(document).ready(function () {
     var mysession = session();
 
 
-    // To check which recommender view is displaying
+    // To check which recommender view is displaying --------------------------
     var recommenderView = '';
     $("#publication_recommender_link").click(function(){
         recommenderView = 'publication';
+        console.log(recommenderView);
     });
     $("#jupyter_recommender_link").click(function(){
         recommenderView = 'jupyter';
+        console.log(recommenderView);
     });
     $("#cloud_recommender_link").click(function(){
         recommenderView = 'cloud';
+        console.log(recommenderView);
     });
     $("#topic_recommender_link").click(function(){
-        recommenderView = 'topic';
+        recommenderView = 'topic-model';
+        console.log(recommenderView);
     });
-
+    // --------------------------------------------------------------------------
 
     // Main function: this method has the logic to handle differen parts of the response returned from the chat server
     function main(data) {
@@ -222,13 +226,13 @@ $(document).ready(function () {
             }
         }
 
-        // Publication Recommender -----------------------------------------------------------------------------------------------
-        if (data.result.resolvedQuery && data.result.metadata.intentName === "publication") {
-            if (recommenderView !== 'publication') {
+        // Publication Recommender --------------------------------------------------------------------------------------------------------
+        if (data.result.resolvedQuery && data.result.metadata.intentName == "publication") {
+            if (recommenderView != 'publication') {
                 setBotResponse("Navigated to Publication Recommender");
             }
             $('#publication_recommender_link').click();
-            recommenderView = 'publication'; // console.log(recommenderView);
+            // recommenderView = 'publication'; // console.log(recommenderView);
         }
 
         if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_type") {
@@ -244,39 +248,63 @@ $(document).ready(function () {
                 $('#putype').val(3); // console.log("select option 3");
             }
         }
+        // if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_search_input") {
+        //     if (data.result.parameters.PMID) {
+        //         setBotResponse("You selected: " + data.result.parameters.PMID);
+        //         $('#searchInput').val(data.result.parameters.PMID);
+        //     }
+        //     if (data.result.parameters.any) {
+        //         setBotResponse("You selected: " + data.result.parameters.any);
+        //         $('#searchInput').val(data.result.parameters.any);
+        //     }
+        //     setBotResponse('Type in the PMID, title, or author name you wish to search:');
+        //     // or type 'CONFIRM' to see the result.
+        // }
+        // if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_confirm") {
+        //     console.log("User input: summit");
+        //     setBotResponse("Here are the results we found!");
+        //     // You can continue your search by typing: (e.g., "search by..." )
+        //     $('#publication-confirm-button').click();
+        // }
+        // ------------------------------------------------------------------------------------------------------------------------------
 
-        if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_search_input") {
-            if (data.result.parameters.PMID) {
-                setBotResponse("You selected: " + data.result.parameters.PMID);
-                $('#searchInput').val(data.result.parameters.PMID);
+        // For ANY entity input -------------------------------------------------------------------
+        if(data.result.resolvedQuery && data.result.metadata.intentName == "user_any_input") {
+            
+            if(recommenderView == "topic-model") {
+                console.log("here");
+                $('#topicin').val(data.result.parameters.any_input);
+                setBotResponse("Do you want to search about "+data.result.parameters.any_input+ "?");
+            } 
+            else if(recommenderView == "publication") {
+                setBotResponse("You selected: " + data.result.parameters.any_input);
+                $('#searchInput').val(data.result.parameters.any_input);
             }
-            if (data.result.parameters.any) {
-                setBotResponse("You selected: " + data.result.parameters.any);
-                $('#searchInput').val(data.result.parameters.any);
-            }
-            setBotResponse('Type in the PMID, title, or author name you wish to search:');
-            // or type 'CONFIRM' to see the result.
         }
 
-        if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_confirm") {
-            console.log("User input: CONFIRM");
-            setBotResponse("Here are the results we found!");
-            // You can continue your search by typing: (e.g., "search by..." )
-            $('#publication-confirm-button').click();
+        // For CONFIRM entity input -------------------------------------------------------------------
+        if(data.result.resolvedQuery && data.result.metadata.intentName == "all_confirm") {
+            console.log("User input: Confirm");
 
+            if(recommenderView == "topic-model") {
+                $('#topic-confirm').click();
+            } 
+            else if(recommenderView == "publication") {
+                setBotResponse('You can continue your search by typing: (e.g., "search by PMID, title, or author"');
+                $('#publication-confirm-button').click();
+            }
         }
-        // -------------------------------------------------------------------------------------
-
         
-        //Topic Model Recommender---------------------------------------------------------------
-        if (data.result.parameters.confirm == 'confirm' && recommenderView == 'topic-model' && data.result.resolvedQuery) {
-            $('#topic-confirm').click();
-        }
-        if (data.result.parameters.topic_input && recommenderView == 'topic-model' && data.result.resolvedQuery) {
-            $('#topicin').val(data.result.parameters.topic_input);
-            setBotResponse("Do you want to research about "+data.result.parameters.topic_input+ "?");
-        }
-        //----------------------------------------------------------------------------------------
+        
+        //Topic Model Recommender-------------------------------------------------------------------------------------
+        // if (data.result.parameters.confirm == 'confirm' && recommenderView == 'topic' && data.result.resolvedQuery) {
+        //     $('#topic-confirm').click();
+        // }
+        // if (data.result.parameters.topic_input && recommenderView == 'topic-model' && data.result.resolvedQuery) {
+        //     $('#topicin').val(data.result.parameters.topic_input);
+        //     setBotResponse("Do you want to search about "+data.result.parameters.topic_input+ "?");
+        // }
+        //------------------------------------------------------------------------------------------------------------
         
         switch (action) {
             // case 'your.action': // set in api.ai
