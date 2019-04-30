@@ -266,12 +266,6 @@
 @endsection
 @section('javascript')
 
-
-
-
-
-
-
     <script type="text/javascript" src="{{ asset('jscss/custom/chatbot/chatbot-angular-controller.js') }}"></script>
 
 @endsection

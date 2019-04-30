@@ -75,8 +75,8 @@
                         <!-- <textarea rows="4" cols="50" id="output"></textarea> -->
                      </div>
                </div>
-               <div class="form-group row ">
-                  <button type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
+               <div class="form-group row " style="float: right;">
+                  <button id="topic-confirm" type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
                </div>
             </form>
       </div>

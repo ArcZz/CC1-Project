@@ -23,12 +23,18 @@ Route::get('/', 'System\HomeController@homePage')->name('system.home');
 
 //template recommender system
 
+
 Route::get('/system/recommender/home', 'System\Recommender\RecomController@homePage')->name('system.recommender.home');
 Route::get('/system/recommender/recommender', 'System\Recommender\RecomController@recommender')->name('system.recommender.recommender');
 Route::get('/system/recommender/template_recommender', 'System\Recommender\TempRecomController@template_recommender')->name('system.recommender.template_recommender');
 
 //Project-Jupyter
 Route::get('/project/jupyter', 'System\Project\TaskController@jupyterRecNotebook')->name('system.project.jupRec');
+
+//Project-Publication
+//Route::get('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
+Route::post('/project/pubrec', 'System\Project\TaskController@pubmedtest')->name('system.project.pubRec');
+
 
 // About
 Route::get('/system/about/participants', 'System\About\ParticipantsController@ParticipantsPage')->name('system.about.participants');
