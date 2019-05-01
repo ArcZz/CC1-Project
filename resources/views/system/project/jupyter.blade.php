@@ -22,7 +22,8 @@
                $jsonData = json_decode($notebooks,true);
                
                foreach($jsonData['notebooks'] as $notebooks) {
-                    echo '<h4>notebook: </h4>'; echo $notebooks['filename'];
+                    $hyperlink = "http://ec2-3-94-109-60.compute-1.amazonaws.com:8001/notebooks/" . $notebooks['filename'];
+                    echo '<h4>notebook: </h4>'; echo "<a href=" . $hyperlink . ">" . $notebooks['filename'] . "</a>";
                     echo '<br>';
                     echo '<h4>cell number: </h4>'; echo $notebooks['cell_no'];
                     echo '<br><br>';

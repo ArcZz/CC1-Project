@@ -39,7 +39,7 @@ class TaskController extends Controller
     }
 
     public function jupyterRecNotebook() {
-        $url = 'http://localhost:8001/api/rec/jupyter?keyword=' . $_GET['jupInput'];
+        $url = 'http://ec2-3-94-109-60.compute-1.amazonaws.com:8001/api/rec/jupyter?keyword=' . $_GET['jupInput'];
         $data = file_get_contents($url);
 
         return view ('system/project/jupyter', ['notebooks' => $data]);
