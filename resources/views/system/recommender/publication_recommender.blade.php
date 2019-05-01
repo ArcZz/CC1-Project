@@ -52,6 +52,9 @@
 
             if (type == 1) {
 
+                //----------------------------------------------------------------------------------------------------//
+                //----------------------------------------------------------------------------------------------------//
+
                 url = "http://localhost:3002/PMID?id=" + searchKey;
 
                 $.ajax({
@@ -62,6 +65,7 @@
                         $("#myFormSearch").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
                     },
                     success: function (data) {
+
                         if (data[0] != undefined) {
                             $("#w3-container").append('<div class="w3-panel w3-card" id="w3-card-outer"></div>');
                             $("#w3-card-outer").append('<h3 style="color: #4C4CFF;"  id="titleID"></h3>');  // 1
@@ -87,7 +91,7 @@
                             // 4
                             $("#PMID").append('<h5>'+ "PMID: " + '</h5>'+ data[0].PMID);
 
-                            for (var i = 0; i < 10; i++) {
+                            for (var i = 0; i < data[0].Sim.length; i++) {
 
                                 var PMID = data[0].Sim[i];
                                 url = "http://localhost:3002/PMID?id=" + PMID;
@@ -100,8 +104,6 @@
                                     //     $("#myFormSearch").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
                                     // },
                                     success: function (data) {
-
-                                        //     $("#psload").remove();
 
                                         console.log(data[0]); // DEBUG
 
@@ -150,11 +152,122 @@
 
             } else if (type == 2) {
 
-                url = "http://localhost:3002/title?id=" + searchKey
+                //----------------------------------------------------------------------------------------------------//
+                //----------------------------------------------------------------------------------------------------//
+
+                url = "http://localhost:3002/titles?id=" + searchKey
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'JSON',
+                    beforeSend: function() {
+                        $("#myFormSearch").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
+                    },
+                    success: function (data) {
+
+                        if (data[0] == undefined) {
+                            $('#resultID').empty();
+                            $("#resultID").append('<br><br><div style="text-align:center;" id="notFound">Not Found</div>');
+                        }
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            console.log(data[i]);
+
+                            if (data[i] != undefined) {
+
+                                $("#w3-container").append('<div class="w3-panel w3-card">' +
+                                    '<h3 style="color: #4C4CFF;"  id="titleID">' +
+                                    '<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[i].PMID + '">' + data[i].Title + '</a>' +
+                                    '</h3>' +
+                                    '<h5>'+ "Author(s): " + '</h5>' +
+                                    '<p id="authorID' + i + '">' +
+                                    '</p>' +
+                                    '<p id="abstractID">' +
+                                    '<h5>'+ 'Abstract: ' + '</h5>'+ data[i].Abstract +
+                                    '</p>' +
+                                    '<p id="PMID">' +
+                                    '<h5>'+ "PMID: " + '</h5>'+ data[i].PMID +
+                                    '</p>' +
+                                    '</div>');
+
+                                for (var j = 0; j < data[i].Authors.length - 1; j++) {
+                                    $("#authorID"+ i).append(data[i].Authors[j] + ', ');
+                                }
+                                $("#authorID" + i).append(data[i].Authors[j]);
+
+                            }
+                        }
+
+                        $("#psload").remove();
+
+                    }
+
+                }).fail(function (xhr, status, error) {
+                    $('#resultID').empty();
+                    $("#resultID").append('<br><br><div style="text-align:center;" id="notFound">Not Found</div>');
+                });
 
             } else if (type == 3) {
 
+                //----------------------------------------------------------------------------------------------------//
+                //----------------------------------------------------------------------------------------------------//
+
                 url = "http://localhost:3002/authors?id=" + searchKey
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'JSON',
+                    beforeSend: function() {
+                        $("#myFormSearch").after('<h4 id="psload" style="text-align:center"><i class="fa fa-spinner fa-spin"></i> Loading...</h4>');
+                    },
+                    success: function (data) {
+
+                        if (data[0] == undefined) {
+                            $('#resultID').empty();
+                            $("#resultID").append('<br><br><div style="text-align:center;" id="notFound">Not Found</div>');
+                        }
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            console.log(data[i]);
+
+                            if (data[i] != undefined) {
+
+                                $("#w3-container").append('<div class="w3-panel w3-card">' +
+                                    '<h3 style="color: #4C4CFF;"  id="titleID">' +
+                                    '<a href="https://www.ncbi.nlm.nih.gov/pubmed/' + data[i].PMID + '">' + data[i].Title + '</a>' +
+                                    '</h3>' +
+                                    '<h5>'+ "Author(s): " + '</h5>' +
+                                    '<p id="authorID' + i + '">' +
+                                    '</p>' +
+                                    '<p id="abstractID">' +
+                                    '<h5>'+ 'Abstract: ' + '</h5>'+ data[i].Abstract +
+                                    '</p>' +
+                                    '<p id="PMID">' +
+                                    '<h5>'+ "PMID: " + '</h5>'+ data[i].PMID +
+                                    '</p>' +
+                                    '</div>');
+
+                                for (var j = 0; j < data[i].Authors.length - 1; j++) {
+                                    $("#authorID"+ i).append(data[i].Authors[j] + ', ');
+                                }
+                                $("#authorID" + i).append(data[i].Authors[j]);
+
+                            }
+                        }
+
+                        $("#psload").remove();
+
+                    }
+
+                }).fail(function (xhr, status, error) {
+                    $('#resultID').empty();
+                    $("#resultID").append('<br><br><div style="text-align:center;" id="notFound">Not Found</div>');
+                });
+
             }
 
         });

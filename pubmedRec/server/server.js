@@ -73,6 +73,7 @@ app.get('/sim',(req,res, next)=>{
 
 
 });
+
 //api title serarch
 app.get('/title/',(req,res, next)=>{
     console.log("find");
@@ -95,53 +96,68 @@ app.get('/title/',(req,res, next)=>{
         }
     })
 
+});
 
+// Titles
+app.get('/titles/',(req,res, next)=>{
+
+    _id = req.query.id;
+    let str = _id;
+    const reg = new RegExp(str, 'i')
+
+    Articles.
+    find(
+        {Title : {$regex : reg}}
+    ).
+    limit(60).
+    exec((err,articles) => {
+
+        if(err) return res.status(400).send(err);
+        res.send(articles);
+
+    });
 });
 
 
-
+// Authors
 app.get('/authors/',(req,res, next)=>{
 
     _id = req.query.id;
     let str = _id;
-    let result = [];
     const reg = new RegExp(str, 'i')
+
     Articles.
     find(
         {Authors : {$regex : reg}}
     ).
-    limit(1).
-    exec((err,articles)=>{
+    limit(60).
+    exec((err,articles) => {
+
         if(err) return res.status(400).send(err);
-        if (articles.length === 0){
+        res.send(articles);
 
-            res.send("no");
-        }else {
-            var data = articles[0];
-
-            console.log(data);
-            result = articles[0]["Sim"];
-            Articles.
-            find({
-                PMID: { $in: result } }).
-            limit(10).
-            exec((err,articles)=>{
-                if(err) return res.status(400).send(err);
-                if (articles.length === 0){
-
-                    res.send("no");
-                }else {
-                    res.send(data+ articles);
-                }
-            })
-        }
-    })
-
-
+        // } else {
+        //     var data = articles[0];
+        //
+        //     console.log(data);
+        //     result = articles[0]["Sim"];
+        //     Articles.
+        //     find({
+        //         PMID: { $in: result } }).
+        //     // limit(10).
+        //     exec((err,articles)=>{
+        //         if(err) return res.status(400).send(err);
+        //         if (articles.length === 0){
+        //             res.send("[]");
+        //         } else {
+        //             res.send(articles);
+        //         }
+        //     })
+        // }
+    });
 });
 
-//Journal
-
+// Journal
 app.get('/journal',(req,res)=>{
     console.log("test");
 
@@ -150,13 +166,12 @@ app.get('/journal',(req,res)=>{
         ]).
     exec((err,articles)=>{
         if(err) return res.status(400).send(err);
-
         res.send(articles);
     })
 
 });
 
-//author
+// Author
 app.get('/author',(req,res)=>{
     console.log("test");
 
@@ -165,72 +180,26 @@ app.get('/author',(req,res)=>{
     ]).
     exec((err,articles)=>{
         if(err) return res.status(400).send(err);
-
         res.send(articles);
     })
 
 });
 
-
-
-//
-<<<<<<< Updated upstream
-// app.post('/pmid',(req,res)=>{
-//     let str = req.body.pmid;
-//     console.log(req.body);
-//     Articles.
-//     find().
-//     where('PMID').equals(str).
-//     exec((err,articles)=>{
-//     if(err) return res.status(400).send(err);
-//     res.send(articles);
-//     })
-// });
-
+// PMID
 app.get('/PMID/',(req,res)=>{
     _id = req.query.id;
     let str = _id;
 
-=======
-app.post('/pmid',(req,res)=>{
-    let str = req.body.pmid;
-    console.log(req.body.pmid);
->>>>>>> Stashed changes
     Articles.
     find().
-    where('PMID').equals(str).
+    where('PMID').
+    equals(str).
     exec((err,articles)=>{
         if(err) return res.status(400).send(err);
-<<<<<<< Updated upstream
         res.send(articles);
-=======
-        if (articles.length === 0){
-
-            res.send("no");
-        }else {
-            var data = articles[0];
-
-            console.log(data);
-            result = articles[0]["Sim"];
-            Articles.
-            find({
-                PMID: { $in: result } }).
-            limit(10).
-            exec((err,articles)=>{
-                if(err) return res.status(400).send(err);
-                if (articles.length === 0){
-
-                    res.send("no");
-                }else {
-                    res.send(data+ articles);
-                }
-            })
-        }
->>>>>>> Stashed changes
     })
 
 });
-
 
 // Middlewares
 // const { auth } = require('./middleware/auth');
