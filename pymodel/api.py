@@ -116,12 +116,12 @@ def query(s="neuron simulation"):
         for j in range(3):
             tool_summary += tools[kt_idx[j]]
             if j != NUM_PRINT_TERMS - 1:
-                tool_summary += ', '
+                tool_summary += ','
 
         for j in range(3):
             dataset_summary += datasets[ks_idx[j]]
             if j != NUM_PRINT_TERMS - 1:
-                dataset_summary += ', '
+                dataset_summary += ','
         #load the query result into dictionary struct
         output.append({"id": int(topics[i]), "summary": str(topic_summary), "tools": str(tool_summary), "datasets": str(dataset_summary)})
         print('\t topic %s : %s\n' % (topics[i], topic_summary))

@@ -176,6 +176,7 @@ $(document).ready(function () {
     var recommenderView = '';
     $("#publication_recommender_link").click(function(){
         recommenderView = 'publication';
+        $('#resultID').empty();
         console.log(recommenderView);
     });
     $("#jupyter_recommender_link").click(function(){
@@ -248,29 +249,10 @@ $(document).ready(function () {
                 $('#putype').val(3); // console.log("select option 3");
             }
         }
-        // if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_search_input") {
-        //     if (data.result.parameters.PMID) {
-        //         setBotResponse("You selected: " + data.result.parameters.PMID);
-        //         $('#searchInput').val(data.result.parameters.PMID);
-        //     }
-        //     if (data.result.parameters.any) {
-        //         setBotResponse("You selected: " + data.result.parameters.any);
-        //         $('#searchInput').val(data.result.parameters.any);
-        //     }
-        //     setBotResponse('Type in the PMID, title, or author name you wish to search:');
-        //     // or type 'CONFIRM' to see the result.
-        // }
-        // if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_confirm") {
-        //     console.log("User input: summit");
-        //     setBotResponse("Here are the results we found!");
-        //     // You can continue your search by typing: (e.g., "search by..." )
-        //     $('#publication-confirm-button').click();
-        // }
         // ------------------------------------------------------------------------------------------------------------------------------
 
         // For ANY entity input -------------------------------------------------------------------
-        if(data.result.resolvedQuery && data.result.metadata.intentName == "user_any_input") {
-            
+        if(data.result.resolvedQuery && data.result.metadata.intentName == "user_any_input" && recommenderView) {
             if(recommenderView == "topic-model") {
                 console.log("here");
                 $('#topicin').val(data.result.parameters.any_input);
@@ -280,18 +262,33 @@ $(document).ready(function () {
                 setBotResponse("You selected: " + data.result.parameters.any_input);
                 $('#searchInput').val(data.result.parameters.any_input);
             }
+            else if(recommenderView == "jupyter") {
+                setBotResponse("You selected: " + data.result.parameters.any_input);
+                $('#?????????????').val(data.result.parameters.any_input);
+            }
+            else if(recommenderView == "cloud") {
+                setBotResponse("You selected: " + data.result.parameters.any_input);
+                $('#?????????????').val(data.result.parameters.any_input);
+            }
         }
 
         // For CONFIRM entity input -------------------------------------------------------------------
         if(data.result.resolvedQuery && data.result.metadata.intentName == "all_confirm") {
             console.log("User input: Confirm");
-
             if(recommenderView == "topic-model") {
                 $('#topic-confirm').click();
             } 
             else if(recommenderView == "publication") {
                 setBotResponse('You can continue your search by typing: (e.g., "search by PMID, title, or author"');
                 $('#publication-confirm-button').click();
+            }
+            else if(recommenderView == "jupyter") {
+                setBotResponse('You can continue your search by typing: (e.g., "search by PMID, title, or author"');
+                $('#???????????').click();
+            }
+            else if(recommenderView == "cloud") {
+                setBotResponse('You can continue your search by typing: (e.g., "search by PMID, title, or author"');
+                $('#?????????').click();
             }
         }
         
