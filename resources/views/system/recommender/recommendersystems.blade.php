@@ -17,7 +17,7 @@
    <div class="col-md-12">
       <h4 style="display: inline-block;">Cloud solution Template Recommender</h4>
        <p style="text-align: justify;">
-         .....Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident.
+       .....Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident.
       </p>
    </div>
 </div>
@@ -25,7 +25,7 @@
    <div class="col-md-12">
       <h4 style="display: inline-block;">Topic Model</h4>
       <p style="text-align: justify;">
-         .....Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident.
+         Topic Recommender is a system that matches user search word with relavant topics and then recommeds user with tools and datasets that relavant to their reaserach intention
       </p>
    </div>
 </div>
