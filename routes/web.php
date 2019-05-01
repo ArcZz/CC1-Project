@@ -77,9 +77,11 @@ Route::get('/system/analytics/workflow_get_job_parameters', 'System\Analytics\Wo
 
 
 //template recommender system
- Route::get('/system/recommender/recommender', 'System\Recommender\RecomController@recommender')->name('system.recommender.recommender');
- Route::get('/system/recommender/template_recommender', 'System\Recommender\TempRecomController@template_recommender')->name('system.recommender.template_recommender');
+Route::get('/system/recommender/recommender', 'System\Recommender\RecomController@recommender')->name('system.recommender.recommender');
+Route::get('/system/recommender/template_recommender', 'System\Recommender\TempRecomController@template_recommender')->name('system.recommender.template_recommender');
 
+//Project-Jupyter
+Route::get('/project/jupyter', 'System\Project\TaskController@jupyterRecNotebook')->name('system.project.jupRec');
 
 
 Route::post('/allocateResources','System\Recommender\TempRecomController@allocateResources');

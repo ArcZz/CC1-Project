@@ -127,7 +127,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h4 style="display: inline-block;">Chatbot Recommender Systems on CyNeuro Portal</h4>
-					<a class="badge badge-warning" href="{{route('system.recommender.home')}}">Click Here</a> <span class="badge badge-danger">New</span>
+					<a class="badge badge-warning" href="{{route('system.recommender.recommender')}}">Click Here</a> <span class="badge badge-danger">New</span>
 				<div class="demo-video ">
   					<div class="">
 						<img style="width: 200px; height: 150px;" src="{{ asset('jscss/custom/img/VIDEO-SOON.png') }}"></img>
