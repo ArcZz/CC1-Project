@@ -176,6 +176,7 @@ $(document).ready(function () {
     var recommenderView = '';
     $("#publication_recommender_link").click(function(){
         recommenderView = 'publication';
+        $('#resultID').empty();
         console.log(recommenderView);
     });
     $("#jupyter_recommender_link").click(function(){
