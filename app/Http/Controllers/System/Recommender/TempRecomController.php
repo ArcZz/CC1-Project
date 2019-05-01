@@ -29,27 +29,59 @@ class TempRecomController extends Controller {
 
 	public function allocateResources(Request $request)
 	{
-		$cloudTemplate= $request->input('cloudTemplate');
-
-		//$typeofInstance =$cloudTemplate['typeofInstance'];
-		//error_log($typeofInstance);
+		$cloudTemplateStr= $request->input('cloudTemplate');
 		
-		$connection_status= \SSH::into('production')->run(array('./run.sh aws t3.nano:2,t3.small:1'), 
-		 function ($line){
+		$cloudTemplate = json_decode($cloudTemplateStr,true);
+		
+		$typeofInstance = $cloudTemplate['typeofInstance'];	
+		$instances = $cloudTemplate['instances'];
+		
+		
+		$commandArg= '';
+		foreach ($instances as $key => $instance) {
+			
+			$commandArg = $commandArg . $instance['instance_name'] . ':' . $instance['instance_count'] . ',';
+		
+		}
+		$commandArg = substr($commandArg, 0, -1);
+		error_log($typeofInstance);
+		
+		$finalCommand = './run.sh ' . $typeofInstance .' ' . $commandArg ;
+		error_log($finalCommand );
+
+		$connection_status= \SSH::into('production')->run(array($finalCommand), 
+		function ($line){
 			$output = $line.PHP_EOL;
-			error_log("===========");
 			error_log($output);
 
 		});
-		error_log($connection_status);
+		
+		//error_log($connection_status);
+		error_log("After function");
+
+		return response()->json(array('msg'=> 'hii'));
+	}
+	
+	public function checkStatus(){
+		
+		$cmd = 'pegasus-status -l /users/apfd6/pipeline_mix/submit/apfd6/pegasus/pipeline/run0001';
+		$connection_status= \SSH::into('production')->run(array('../condor.sh','condor_master',$cmd), 
+		function ($line){
+			$output = $line.PHP_EOL;
+			error_log($output);
+
+		});
 		error_log("After function");
 
 		return response()->json(array('msg'=> 'hii'));
 	}
    
-public function callOptimizer()
+public function callOptimizer(Request $request)
 	{
-		$clouddetails='{"req_os":"LINUX","req_vCPU":"8","req_ram":"12","req_network":"5","req_clock":"2","req_gpu":false,"req_storage":"20","req_ssd":false}';
+		
+		$clouddetails= $request->input('clouddetails');
+
+		//$clouddetails='{"req_os":"LINUX","req_vCPU":"8","req_ram":"12","req_network":"5","req_clock":"2","req_gpu":false,"req_storage":"20","req_ssd":false}';
 		
 		/*$ch = curl_init('http://10.7.24.31:8080/TestingWeb/rest/getTemplateCatalog');
 		curl_setopt_array($ch, array(

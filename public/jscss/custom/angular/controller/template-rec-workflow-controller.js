@@ -100,7 +100,10 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 
 	}
 	
-	$scope.selectTemplate = function(cloudTemplate){
+	$scope.selectTemplate = function(cloudTemplate ,is_popup){
+		
+		$scope.visibleSection = 'temprecomdstep4';
+
 		var type_cloud = [];
 		var  instances = cloudTemplate.instances;
 		for (key_cloud in instances) {
@@ -115,14 +118,14 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 		var check_local = type_cloud.indexOf("LOCAL");
 		
 		if(check_aws >= 0 && check_local >= 0){
-			cloudTemplate['typeofInstance'] = 'AWS_LOCAL';
+			cloudTemplate['typeofInstance'] = 'aws_local';
 		}
 		else if(check_aws >= 0 && check_local == -1){
-			cloudTemplate['typeofInstance'] = 'AWS';
+			cloudTemplate['typeofInstance'] = 'aws';
 
 		}
 		else if(check_aws == -1 && check_local >= 0){
-			cloudTemplate['typeofInstance'] = 'LOCAL';
+			cloudTemplate['typeofInstance'] = 'local';
 
 		}
 		
@@ -139,11 +142,30 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 
 		$http(req).then(function (data) {
 			console.log(data);
-			alert(1)
+			$scope.visibleSection = 'temprecomdstep3';
+			
 		});
 		
 		
 
+	}
+	$scope.checkStatus = function(){
+		var req = {
+				method: 'POST',
+				url: '/checkStatus',
+				headers: {
+					'Content-Type': 'json',
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+
+			}
+
+			$http(req).then(function (data) {
+				console.log(data);
+				alert(1);
+				//$scope.visibleSection = 'temprecomdstep3;
+				
+			});
 	}
 
 	$scope.proceed = function () {
@@ -160,7 +182,7 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 			$scope.errorworkflowtype = false;
 
 			var closeWorkflowModal = document.getElementById('selectWorkflowModal');
-			selectWorkflowModal.click();
+			closeWorkflowModal.click();
 
 
 		}

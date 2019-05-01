@@ -1,4 +1,6 @@
 
+  
+
    <div class="row">
       <div class="col-12">
          <h3 class="section-heading">Cloud solution Template Recommender</h3>
@@ -39,10 +41,14 @@
                   <div class="form-group row ">
                      <div class="col-md-12">
                         <label for="req_os" class=" col-form-label">Required OS</label><br>
-						<input type="checkbox"  ng-model="operatingsystem['LINUX']" ng-click="req_operatingsystem('LINUX');" id="req_os" name="req_os" value = "LINUX"/> &nbsp;LINUX &nbsp;&nbsp;
-						<input type="checkbox"  ng-model="operatingsystem['RHEL']" ng-click="req_operatingsystem('RHEL');" id="req_os" name="req_os" value = "RHEL"/> &nbsp;RHEL &nbsp;&nbsp;
-						<input type="checkbox"  ng-model="operatingsystem['SLES']" ng-click="req_operatingsystem('SLES');" id="req_os" name="req_os" value = "SLES"/> &nbsp;SLES &nbsp;&nbsp;
-						<input type="checkbox"  ng-model="operatingsystem['WINDOWS']" ng-click="req_operatingsystem('WINDOWS');" id="req_os" name="req_os" value = "WINDOWS"/> &nbsp;WINDOWS &nbsp;&nbsp;
+						<select class="form-control"  ng-model="clouddetails.req_os" name="select">
+							<option>--Select OS--</option>
+							<option>LINUX </option>
+							<option> RHEL</option>
+							<option>SLES </option>
+							<option>WINDOWS </option>
+						</select>
+						
                      </div>
                     
                   </div>
@@ -78,8 +84,13 @@
                   </div>
 				  <div class="form-group row ">
                      <div class="col-md-12">
-                        <label for="jobname" class=" col-form-label">Do you require dedicated GPU?</label>
-						<input type="text" class="form-control" ng-model="clouddetails.req_gpu"  id="req_gpu" name="req_gpu" value = ""/>
+                        <label for="jobname" class=" col-form-label">Do you require dedicated GPU?</label><br>
+						<select  class="form-control" ng-model="clouddetails.req_gpu" name="req_gpu">
+							<option>--Select--</option>
+							<option value="true">Yes </option>
+							<option  value="false"> No</option>
+						
+						</select>
                      </div>
                     
                   </div>
@@ -94,8 +105,13 @@
 				  
 				  <div class="form-group row ">
                      <div class="col-md-12">
-                        <label for="jobname" class=" col-form-label">Do you need SSD Storage?</label>
-						<input type="text" class="form-control"  ng-model="clouddetails.req_ssd" id="req_ssd" name="req_ssd" value = ""/>
+                        <label for="jobname" class=" col-form-label">Do you need SSD Storage?</label><br/>
+						<select ng-model="clouddetails.req_ssd" name="req_ssd" class="form-control" >
+							<option>--Select--</option>
+							<option value="true">Yes </option>
+							<option  value="false"> No</option>
+						
+						</select>
                      </div>
                     
                   </div>
@@ -123,7 +139,7 @@
 						<div class="cloud_body ">
 							<div class="template" ng-repeat="(key, cloudTemplate) in cloudTemplateSuggetion.Red" >
 								 <p>Template @{{ key+1 }} &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  Cost : @{{ cloudTemplate.template_Cost|number : 2  }} / hour</p>
-								 <a href="#"  data-toggle="modal" data-target="#viewTemplateDetail"  ng-click="viewTemplateDetails(cloudTemplate);" > View details</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#"  ng-click="selectTemplate(cloudTemplate);" >Select Template</a>
+								 <a href="#"  data-toggle="modal" data-target="#viewTemplateDetail"  ng-click="viewTemplateDetails(cloudTemplate);" > View details</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#"  ng-click="selectTemplate(cloudTemplate,false);" >Select Template</a>
 								 
 							</div>
 						</div>
@@ -137,7 +153,7 @@
 						<div class="cloud_body ">
 							<div class="template" ng-repeat="(key, cloudTemplate) in cloudTemplateSuggetion.Green">
 								 <p>Template @{{ key+1 }} &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  Cost : @{{ cloudTemplate.template_Cost |number : 2  }} / hour</p>
-								 <a href="#"  data-toggle="modal" data-target="#viewTemplateDetail"  ng-click="viewTemplateDetails(cloudTemplate);" > View details</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#" >Select Template</a>
+								 <a href="#"  data-toggle="modal" data-target="#viewTemplateDetail"  ng-click="viewTemplateDetails(cloudTemplate);" > View details</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#"  ng-click="selectTemplate(cloudTemplate,false);">Select Template</a>
 								 
 							</div>
 						</div>
@@ -152,18 +168,58 @@
 						<div class="cloud_body ">
 							<div class="template" ng-repeat="(key, cloudTemplate) in cloudTemplateSuggetion.Gold">
 								 <p>Template @{{ key+1 }} &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  Cost : @{{ cloudTemplate.template_Cost |number : 2 }} / hour</p>
-								 <a href="#"  data-toggle="modal" data-target="#viewTemplateDetail"  ng-click="viewTemplateDetails(cloudTemplate);" > View details</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#" >Select Template</a>
+								 <a href="#"  data-toggle="modal" data-target="#viewTemplateDetail"  ng-click="viewTemplateDetails(cloudTemplate);" > View details</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#"  ng-click="selectTemplate(cloudTemplate,false);" >Select Template</a>
 								 
 							</div>
 						</div>
 					</div>
 			   </div>
-               <p style="text-align: right;">
+              <!-- <p style="text-align: right;">
                   <button type="button" class="btn btn-primary" >
                   Next
                   </button>
-               </p>
+               </p>-->
             </div>
+			
+			 <div  class="col-md-12" id="secondSection" ng-show="visibleSection && visibleSection == 'temprecomdstep3'">
+               <h4 style="display: inline-block;">Step 3: Image processing analysis - Select Cloud Template</h4>
+               <br/>
+			   
+			   <div class="row">
+					
+					<div class="col-md-12  ">
+						<div class="alert alert-success" >
+							<p>Workflow has been submitted </p>
+							<p><a href="#"  ng-click="checkStatus();" >Click Here</a> to check status</p>
+						</div>
+						
+					</div>
+					
+				
+					
+			   </div>
+
+            </div>
+			
+			 <div  class="col-md-12" id="secondSection" ng-show="visibleSection && visibleSection == 'temprecomdstep4'">
+               <h4 style="display: inline-block;">Step 3: Image processing analysis - Select Cloud Template</h4>
+               <br/>
+			   
+			   <div class="row">
+					
+					<div class="col-md-12  ">
+						<div class="alert alert-warning" >
+							<p> <div class="loader"></div> &nbsp;&nbsp;&nbsp;Please wait  </p>
+						</div>
+						
+					</div>
+					
+				
+					
+			   </div>
+             
+            </div>
+			
          </div>
          <!-- Modal -->
          <div class="modal fade" id="selectWorkflowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
@@ -222,8 +278,8 @@
 					</table>
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" id="closeWorkflowModal" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary" ng-click="selectTemplate()">Select Template</button>
+                     <button type="button" class="btn btn-secondary" id="closeSelectTempModal" data-dismiss="modal">Close</button>
+                   <!--  <button type="button" class="btn btn-primary" ng-click="selectTemplate(cloudTemplate,true);">Select Template</button> -->
                   </div>
                </div>
             </div>

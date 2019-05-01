@@ -410,3 +410,17 @@ td.gold{
 	padding: 0px !important;
     margin: 0px;
 }
+.loader {
+ border: .25em solid #F1B82D;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+    border-right-color: transparent;
+    float: left;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
