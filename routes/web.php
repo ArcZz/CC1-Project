@@ -89,3 +89,13 @@ Route::get('/system/analytics/workflow_get_job_list', 'System\Analytics\Workflow
 
 Route::get('/system/analytics/workflow_get_job_parameters', 'System\Analytics\WorkflowController@workflow_get_job_parameters')->name('system.analytics.workflow_get_job_parameters');
 
+
+
+
+
+Route::post('/allocateResources','System\Recommender\TempRecomController@allocateResources');
+
+Route::post('/callOptimizer','System\Recommender\TempRecomController@callOptimizer');
+
+
+
