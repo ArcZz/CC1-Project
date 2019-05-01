@@ -32,7 +32,16 @@
                 xmlhttp.send(text);
             }
    </script>  -->
+
+  
    <script>
+               //References:
+	            //https://www.w3schools.com/php/php_ajax_php.asp
+               //https://stackoverflow.com/questions/24468459/sending-a-json-to-server-and-retrieving-a-json-in-return-without-jquery
+	            //https://stackoverflow.com/questions/18441375/submit-form-field-values-to-a-javascript-function
+               //https://www.w3schools.com/js/js_object_definition.asp
+               //https://www.w3schools.com/jsref/jsref_split.asp
+               //https://stackoverflow.com/questions/40683151/compare-a-string-to-a-key-in-a-javascript-object
             var tool = {
                hnn: 		   'https://hnn.brown.edu/',
                lsnm:		   'https://omictools.com/lsnm-tool',	
@@ -82,9 +91,7 @@
                matplotlib:	'https://matplotlib.org/'
             };
             function output(){
-	            //https://www.w3schools.com/php/php_ajax_php.asp
-                //https://stackoverflow.com/questions/24468459/sending-a-json-to-server-and-retrieving-a-json-in-return-without-jquery
-	            //https://stackoverflow.com/questions/18441375/submit-form-field-values-to-a-javascript-function
+             
                var xmlhttp = new XMLHttpRequest();
                var input = document.getElementById("topicin").value;
 	            xmlhttp.onreadystatechange = function() {
@@ -92,7 +99,7 @@
                         var text = null;
                         text = this.responseText;
                         text = JSON.parse(text);
-                        var output = "Here is the popular tools and datasets we found that relevant to your topic: \n";
+                        var output = "Here is the tools and datasets we found relevant to your topic: \n";
                         output = output.concat('Click on the link on each tool to learn more about them \n');
                         if(text != null){
                             var t = text.topics;
@@ -157,7 +164,7 @@
                         <label for="jobname" class=" col-form-label">Output</label>
                      </div>
                      <div class="col-md-7">
-                        <div style="border:1px solid black;padding:2px;">
+                        <div style="border:1px solid black;padding:2px;width:700px;height:200px;">
                            <pre id="output"></pre>
                         </div>
                         <!-- <textarea rows="4" cols="50" id="output"></textarea> -->
