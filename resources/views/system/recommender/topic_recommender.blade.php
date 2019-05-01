@@ -27,7 +27,7 @@
                     }
                 };
                 var text = JSON.stringify({"text": input});
-                xmlhttp.open("POST", "http://localhost:9000/api/topics", true);
+                xmlhttp.open("POST", "http://54.173.2.13:9000/api/topics", true);
                 xmlhttp.setRequestHeader("Content-Type", "application/json");
                 xmlhttp.send(text);
             }
@@ -52,7 +52,7 @@
       </div>   
 
       <div  class="col-md-12" id="secondSection">
-            <form method="POST" action="http://localhost:9000/api/topics">
+            <form method="POST" action="http://54.173.2.13:9000/api/topics">
 			   <br/>
             <p>Type in keyword of the topics you want to research</p>
                <div class="form-group row ">
