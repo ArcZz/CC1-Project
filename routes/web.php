@@ -21,21 +21,6 @@
 Route::get('/', 'System\HomeController@homePage')->name('system.home');
 
 
-//template recommender system
-
-
-Route::get('/system/recommender/home', 'System\Recommender\RecomController@homePage')->name('system.recommender.home');
-Route::get('/system/recommender/recommender', 'System\Recommender\RecomController@recommender')->name('system.recommender.recommender');
-Route::get('/system/recommender/template_recommender', 'System\Recommender\TempRecomController@template_recommender')->name('system.recommender.template_recommender');
-
-//Project-Jupyter
-Route::get('/project/jupyter', 'System\Project\TaskController@jupyterRecNotebook')->name('system.project.jupRec');
-
-//Project-Publication
-//Route::get('/project/pubrec', 'System\Project\TaskController@pubmedRecPage')->name('system.project.pubRec');
-Route::post('/project/pubrec', 'System\Project\TaskController@pubmedtest')->name('system.project.pubRec');
-
-
 // About
 Route::get('/system/about/participants', 'System\About\ParticipantsController@ParticipantsPage')->name('system.about.participants');
 Route::get('/system/about/publications', 'System\About\PublicationsController@PublicationsPage')->name('system.about.publications');
@@ -48,7 +33,6 @@ Route::get('/system/about/courses/ECE_CS_4001_7001', 'System\About\CoursesContro
 Route::get('/system/analytics/workflow_templates', 'System\Analytics\ProjectController@project_page')->name('system.analytics.workflow_templates');
 Route::get('/system/analytics/workflow_page', 'System\Analytics\WorkflowController@workflow_page')->name('system.analytics.workflow_page');
 Route::get('/system/analytics/neuron_nsg_workflow', 'System\Analytics\WorkflowController@neuron_nsg_workflow')->name('system.analytics.neuron_nsg_workflow');
-
 //test
 Route::get('/system/analytics/test', 'System\Analytics\WorkflowController@test')->name('system.analytics.test');
 Route::get('/system/analytics/datasets', 'System\Analytics\DatasetsController@DatasetsPage')->name('system.analytics.datasets');
@@ -92,12 +76,19 @@ Route::get('/system/analytics/workflow_get_job_list', 'System\Analytics\Workflow
 Route::get('/system/analytics/workflow_get_job_parameters', 'System\Analytics\WorkflowController@workflow_get_job_parameters')->name('system.analytics.workflow_get_job_parameters');
 
 
+//template recommender system
+ Route::get('/system/recommender/recommender', 'System\Recommender\RecomController@recommender')->name('system.recommender.recommender');
+ Route::get('/system/recommender/template_recommender', 'System\Recommender\TempRecomController@template_recommender')->name('system.recommender.template_recommender');
 
 
 
 Route::post('/allocateResources','System\Recommender\TempRecomController@allocateResources');
 
 Route::post('/callOptimizer','System\Recommender\TempRecomController@callOptimizer');
+
+Route::post('/checkStatus','System\Recommender\TempRecomController@checkStatus');
+
+
 
 
 
