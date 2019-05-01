@@ -235,7 +235,6 @@ $(document).ready(function () {
             $('#publication_recommender_link').click();
             // recommenderView = 'publication'; // console.log(recommenderView);
         }
-
         if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_type") {
             console.log("User input type: " + data.result.parameters.publication_type);
             if (data.result.parameters.publication_type == "PMID") {
