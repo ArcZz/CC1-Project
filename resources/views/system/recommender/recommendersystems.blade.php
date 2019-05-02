@@ -17,7 +17,9 @@
    <div class="col-md-12">
       <h4 style="display: inline-block;">Cloud solution Template Recommender</h4>
        <p style="text-align: justify;">
-       .....Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Excepteur sint occaecat cupidatat non proident.
+       Cloud solution Template Recommender suggests cloud solution to user according to user’s requirement.
+	It will also give information about CPU, memory, networking, cost, duration, etc of instances.
+	According to user template selection, system will assign resources for computation.
       </p>
    </div>
 </div>

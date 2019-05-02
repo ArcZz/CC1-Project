@@ -9,7 +9,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h3 class="section-heading">Recommender Systems</h3>
+				<a style="color:black; background: transparent; border: none;" class="btn btn-primary btn-lg" href="{{ route('system.recommender.recommender') }}" role="button">
+					<h3 class="section-heading">Recommender Systems</h3>
+				</a>
 				<hr class="hr-line">
 			</div>
 		</div>
