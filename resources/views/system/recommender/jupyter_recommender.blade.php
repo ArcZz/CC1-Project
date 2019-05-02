@@ -12,7 +12,7 @@
             <label for="juin">Jupyter Notebook Input</label>
             <input type="text" name="jupInput" class="form-control" id="juin" aria-describedby="juHelp" placeholder="Enter a keyword">
             </br>
-            <button type="submit" class="btn btn-primary ">Confirm</button>
+            <button id='juconfirm' type="submit" class="btn btn-primary ">Confirm</button>
          </div>
       </form>
    </div> 

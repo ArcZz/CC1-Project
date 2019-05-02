@@ -264,7 +264,7 @@ $(document).ready(function () {
             }
             else if(recommenderView == "jupyter") {
                 setBotResponse("You selected: " + data.result.parameters.any_input);
-                $('#?????????????').val(data.result.parameters.any_input);
+                $('#juin').val(data.result.parameters.any_input);
             }
             else if(recommenderView == "cloud") {
                 setBotResponse("You selected: " + data.result.parameters.any_input);
@@ -284,7 +284,7 @@ $(document).ready(function () {
             }
             else if(recommenderView == "jupyter") {
                 setBotResponse('You can continue your search by typing: (e.g., "search by PMID, title, or author"');
-                $('#???????????').click();
+                $('#juconfirm').click();
             }
             else if(recommenderView == "cloud") {
                 setBotResponse('You can continue your search by typing: (e.g., "search by PMID, title, or author"');
@@ -292,6 +292,15 @@ $(document).ready(function () {
             }
         }
         
+        //Jupyter Notebook Recommender
+        if (data.result.resolvedQuery && data.result.metadata.intentName == "jupyter_download") {
+            console.log("User input: Download");
+            if (recommenderView == "jupyter") {
+                setBotResponse()
+                $('.junotebook').click();
+            }
+        }
+
         
         //Topic Model Recommender-------------------------------------------------------------------------------------
         // if (data.result.parameters.confirm == 'confirm' && recommenderView == 'topic' && data.result.resolvedQuery) {
