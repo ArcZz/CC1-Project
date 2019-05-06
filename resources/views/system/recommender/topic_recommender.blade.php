@@ -227,22 +227,22 @@
 			   <br/>
             <p>Type in keyword of the topics you want to research</p>
                <div class="form-group row ">
-                     <div class="col-md-3">
+                     <div class="col-md-1">
                         <label for="jobname" class=" col-form-label">Input</label>
                         <input type="text" class="form-control" id="topicin" name="appname" value = ""/>
                      </div>
                </div>
 				  
                <div class="form-group row ">
-                     <div class="col-md-3">
+                     <div class="col-md-1">
                         <label for="jobname" class=" col-form-label">Output</label>
                         <div style="border:1px solid black;padding:2px;width:900px;">
                            <pre id="output"></pre>
                         </div>
                      </div>
                </div>
-               <div class="form-group row " style="float: right;">
-                  <button id="topic-confirm" type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
+               <div class="form-group row " style="justify-content: center;">
+                   <button  id="topic-confirm" type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
                </div>
             </form>
       </div>

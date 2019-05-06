@@ -25,7 +25,7 @@
                 <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="pubHelp"
                        placeholder='Please enter "PMID", "Title", or "Author"...'>
                 </br>
-                <button id="publication-confirm-button" type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+                <button id="publication-confirm-button" type="submit" class="btn btn-primary" style="...">Confrim</button>
             </div>
         </form>
 
