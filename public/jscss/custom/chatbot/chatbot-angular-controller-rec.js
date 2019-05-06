@@ -230,7 +230,7 @@ $(document).ready(function () {
         if (data.result.resolvedQuery && data.result.metadata.intentName == "topic-model") {
             if (recommenderView != 'topic-model') { // check if the user is on different view
                 setBotResponse("Navigated to Topic Model Recommender");
-                setBotResponse("Type the topic you would like to research in the input box (E.g neuron simulation) and we will give back relevant tools and datasets to your topic");
+                //setBotResponse("Type the topic you would like to research in the input box (E.g neuron simulation) and we will give back relevant tools and datasets to your topic");
             }
             $('#topic_recommender_link').click();
         }
