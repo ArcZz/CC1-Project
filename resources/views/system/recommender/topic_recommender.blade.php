@@ -111,7 +111,7 @@
                                for(var j = 0; j < keys.length;j++){
                                   if(temp[i] == keys[j]){
                                      console.log('equal');
-                                     temp[i] = '<a href='+tool[keys[j]]+'>'+temp[i]+'</a>';
+                                     temp[i] = '<a style="color:blue; text-decoration: underline;" href='+tool[keys[j]]+'>'+temp[i]+'</a>';
                                   }
                                }
                             }
@@ -151,27 +151,27 @@
 			   <br/>
             <p>Type in keyword of the topics you want to research</p>
                <div class="form-group row ">
-                     <div class="col-md-3">
+                     <div class="col-md-1">
                         <label for="jobname" class=" col-form-label">Input</label>
                      </div>
-                     <div class="col-md-7">
+                     <div class="col-md-9">
                         <input type="text" class="form-control" id="topicin" name="appname" value = ""/>
                      </div>
                </div>
 				  
                <div class="form-group row ">
-                     <div class="col-md-3">
+                     <div class="col-md-1">
                         <label for="jobname" class=" col-form-label">Output</label>
                      </div>
-                     <div class="col-md-7">
+                     <div class="col-md-11">
                         <div style="border:1px solid black;padding:2px;width:700px;height:200px;">
                            <pre id="output"></pre>
                         </div>
                         <!-- <textarea rows="4" cols="50" id="output"></textarea> -->
                      </div>
                </div>
-               <div class="form-group row " style="float: right; margin-right: 250px;">
-                  <button id="topic-confirm" type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
+               <div class="form-group row " style="justify-content: center;">
+                   <button  id="topic-confirm" type="button" class="btn btn-primary mb-2" onclick="output()">Confirm</button>
                </div>
             </form>
       </div>

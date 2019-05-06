@@ -172,7 +172,7 @@ $(document).ready(function () {
     var mysession = session();
 
 
-    // To check which recommender view is displaying --------------------------
+    // To check which recommender view is displaying if the user click on any link--------------------------
     var recommenderView = '';
     $("#publication_recommender_link").click(function(){
         recommenderView = 'publication';
@@ -209,31 +209,38 @@ $(document).ready(function () {
             }
         }
 
-        if (data.result.parameters && data.result.parameters.type_recommender) {
-            if (data.result.parameters.type_recommender == 'Jupyter Notebook Recommender') {
-                $('#jupyter_recommender_link').click();
+        // Cloud Solution Template Recommender ------------------------------------------------------------------------------------------------------
+        if (data.result.resolvedQuery && data.result.metadata.intentName == "cloud") {
+            if (recommenderView != 'cloud') { // check if the user is on different view
+                setBotResponse("Navigated to Cloud Solution Template Recommender");
             }
-            // else if (data.result.parameters.type_recommender == 'Publication Recommender') {
-            //     $('#publication_recommender_link').click();
-            //     recommender = 'publication';
-            // }
-            else if (data.result.parameters.type_recommender == 'Cloud solution Template Recommender') {
-                $('#cloud_recommender_link').click();
-            }
-            else if (data.result.parameters.type_recommender == 'Topic Model') {
-                $('#topic_recommender_link').click();
-                recommenderView = 'topic-model';
-                setBotResponse("Type in the topic you want to research in the imput field");
-            }
+            $('#cloud_recommender_link').click();
         }
 
-        // Publication Recommender --------------------------------------------------------------------------------------------------------
+        // Jupyter Notebook Recommender ------------------------------------------------------------------------------------------------------
+        if (data.result.resolvedQuery && data.result.metadata.intentName == "jupyter") {
+            if (recommenderView != 'jupyterl') { // check if the user is on different view
+                setBotResponse("Navigated to JUPYTER NOTEBOOK RECOMMENDER");
+            }
+            $('#jupyter_recommender_link').click();
+        }
+        // ------------------------------------------------------------------------------------------------------------------------------
+
+        // Topic Model Recommender ------------------------------------------------------------------------------------------------------
+        if (data.result.resolvedQuery && data.result.metadata.intentName == "topic-model") {
+            if (recommenderView != 'topic-model') { // check if the user is on different view
+                setBotResponse("Navigated to Topic Model Recommender");
+            }
+            $('#topic_recommender_link').click();
+        }
+        // ------------------------------------------------------------------------------------------------------------------------------
+
+        // Publication Recommender ------------------------------------------------------------------------------------------------------
         if (data.result.resolvedQuery && data.result.metadata.intentName == "publication") {
-            if (recommenderView != 'publication') {
+            if (recommenderView != 'publication') { // check if the user is on different view
                 setBotResponse("Navigated to Publication Recommender");
             }
             $('#publication_recommender_link').click();
-            // recommenderView = 'publication'; // console.log(recommenderView);
         }
         if (recommenderView == 'publication' && data.result.resolvedQuery && data.result.metadata.intentName == "publication_type") {
             console.log("User input type: " + data.result.parameters.publication_type);
@@ -248,7 +255,7 @@ $(document).ready(function () {
                 $('#putype').val(3); // console.log("select option 3");
             }
         }
-        // ------------------------------------------------------------------------------------------------------------------------------
+        // -----------------------------------------------------------------------------------------------------------------------------
 
         // For ANY entity input -------------------------------------------------------------------
         if(data.result.resolvedQuery && data.result.metadata.intentName == "user_any_input" && recommenderView) {
