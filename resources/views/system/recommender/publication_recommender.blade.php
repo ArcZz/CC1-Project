@@ -24,7 +24,8 @@
                 </br>
                 <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="pubHelp"
                        placeholder='Please enter "PMID", "Title", or "Author"...'>
-                </br>
+                <label style = "color: gray;"> Example for PMID = 12345678</label>
+                </br></br>
                 <button id="publication-confirm-button" type="submit" class="btn btn-primary" style="...">Confrim</button>
             </div>
         </form>
