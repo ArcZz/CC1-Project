@@ -9,6 +9,8 @@
       <form action="{{ url("/project/jupyter") }}" method="get">
          {{ csrf_field() }}
          <div class="form-group">
+            <label>This recommender searches through a group of Jupyter Notebooks and picks various ones based on a keyword search.</label>
+            </br></br>
             <label for="juin">Jupyter Notebook Input</label>
             <input type="text" name="jupInput" class="form-control" id="juin" aria-describedby="juHelp" placeholder="Enter a keyword">
             </br>
