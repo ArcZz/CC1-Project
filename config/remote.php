@@ -10,7 +10,7 @@ return [
 			'port' 		=> '22',
             'username'  => 'apfd6',
             'password'  => '', // no password
-            'key'       => 'C:\xampp\htdocs\cyneuro\ssh\id_geni_ssh_rsa_ashish',
+            'key'       => '..\ssh\id_geni_ssh_rsa_ashish',
             'keytext'   => 'myKey@90',
             'keyphrase' => 'myKey@90',
             'agent'     => '',
