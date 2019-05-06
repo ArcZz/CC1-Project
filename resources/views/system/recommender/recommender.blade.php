@@ -4,19 +4,21 @@
 <link href="{{ asset('jscss/dropzone/dropzone.css') }}" rel="stylesheet">
 <!-- Style sheet for the Chatbot -->
 <link rel="stylesheet"  href="{{ asset('jscss/custom/chatbot/chatbot.css') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <section class="bg-light">
 	<div class="container">
+	<div  ng-controller="recommender-workflow" >
 		<div class="row">
 			<div class="col-12">
-				<a style="color:black; background: transparent; border: none;" class="btn btn-primary btn-lg" href="{{ route('system.recommender.recommender') }}" role="button">
+				<a style="color:black; background: transparent; border: none;" class="btn btn-primary btn-lg" href="#" ng-click="openMainPageRecommender();" role="button">
 					<h3 class="section-heading">Recommender Systems</h3>
 				</a>
 				<hr class="hr-line">
 			</div>
 		</div>
 		
-		<div class="row" ng-controller="recommender-workflow">
+		<div class="row" >
 		
 		   <div class="col-md-3 recommender-left-menu"   > 
 			  <input type="submit" id="jupyter_recommender_link" ng-click="openRecommender('jupyter_recommender');" ng-class="classActive['jupyter_recommender']" class="list-group-item  text-center"
@@ -49,6 +51,7 @@
 				 @include(' system.recommender.topic_recommender')
 			  </div>
 		   </div>
+		</div>
 		</div>
 		
 		<div ng-controller="chatbot-controller">

@@ -212,7 +212,7 @@ $(document).ready(function () {
         // Cloud Solution Template Recommender ------------------------------------------------------------------------------------------------------
         if (data.result.resolvedQuery && data.result.metadata.intentName == "cloud") {
             if (recommenderView != 'cloud') { // check if the user is on different view
-                setBotResponse("Navigated to Cloud Solution Template Recommender");
+               // setBotResponse("Navigated to Cloud Solution Template Recommender");
             }
             $('#cloud_recommender_link').click();
         }
@@ -377,6 +377,48 @@ $(document).ready(function () {
                 }
                 break;
         }
+		
+		
+		if (data.result.parameters.type_recommender == 'Cloud solution Template Recommender') {
+            //$('#cloud_recommender_link').click();
+			setBotResponse("Please select image to process image on grayscale workflow.");
+
+        }
+		
+		if(recommenderView == 'cloud'){
+			if(data.result.parameters && (data.result.parameters.next == 'Next' || data.result.parameters.next == 'next')){
+				if($screenID == 'firstpage'){
+					$("#upload").click();
+					//setBotResponse("Please Select Workflow Type.");
+
+				}
+				else if($screenID == 'temprecomdstep1'){
+					$("#callOptimizer").click();
+					//setBotResponse("Please Select Template.");
+				}
+
+			}
+			
+			if(data.result.parameters && data.result.parameters.type_of_function && data.result.parameters.type_of_function == 'view'){
+				template_id = data.result.parameters.select_cloud_template;
+				$("#view"+template_id).click();
+			}
+			
+			if(data.result.parameters && data.result.parameters.type_of_function && data.result.parameters.type_of_function == 'select'){
+				template_id = data.result.parameters.select_cloud_template;
+				$("#select"+template_id).click();
+			}
+			
+			if(data.result.parameters && data.result.parameters.screen_assist && data.result.parameters.screen_assist == 'true' && $screenID == 'temprecomdstep1'){
+				setBotResponse("Please enter information in screen accourding to your application requirement. If you have query regarding individual inputs i can assist you with that.");	
+
+			}
+			
+			if(data.result.parameters && data.result.parameters.screen_assist && data.result.parameters.screen_assist == 'true' && $screenID == 'temprecomdstep2'){
+				setBotResponse("Please select template accourding to your application requirement. If you have query regarding individual category i can assist you with that.");	
+
+			}
+		}
     }
 
 

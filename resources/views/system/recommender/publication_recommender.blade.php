@@ -14,6 +14,8 @@
         <form method="post" id="myFormSearch">
             {{ csrf_field() }}
             <div class="form-group">
+                <Label>We have developed a PubMed article recommendation system, which is based on content-based filtering. This filter is for searching for specific authors, PMID, and titles which also suggest relevant related research publications.</Label>
+                </br></br>
                 <label for="pubin">Input</label>
                 <label for="putype">Type:</label>
                 <select class="form-control" id="putype" name="putype">
@@ -24,7 +26,8 @@
                 </br>
                 <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="pubHelp"
                        placeholder='Please enter "PMID", "Title", or "Author"...'>
-                </br>
+                <label style = "color: gray;"> Example for PMID = 12345678</label>
+                </br></br>
                 <button id="publication-confirm-button" type="submit" class="btn btn-primary" style="...">Confrim</button>
             </div>
         </form>
