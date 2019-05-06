@@ -14,6 +14,8 @@
         <form method="post" id="myFormSearch">
             {{ csrf_field() }}
             <div class="form-group">
+                <Label>We have developed a PubMed article recommendation system, which is based on content-based filtering. This filter is for searching for specific authors, PMID, and titles which also suggest relevant related research publications.</Label>
+                </br></br>
                 <label for="pubin">Input</label>
                 <label for="putype">Type:</label>
                 <select class="form-control" id="putype" name="putype">
