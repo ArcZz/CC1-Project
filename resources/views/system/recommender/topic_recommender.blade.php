@@ -227,16 +227,16 @@
 			   <br/>
             <p>Type in keyword of the topics you want to research</p>
                <div class="form-group row ">
-                     <div class="col-md-1">
+                     <div class="col-md-12">
                         <label for="jobname" class=" col-form-label">Input</label>
                         <input type="text" class="form-control" id="topicin" name="appname" value = ""/>
                      </div>
                </div>
 				  
                <div class="form-group row ">
-                     <div class="col-md-1">
+                     <div class="col-md-12">
                         <label for="jobname" class=" col-form-label">Output</label>
-                        <div style="border:1px solid black;padding:2px;width:900px;">
+                        <div style="border:1px solid black;padding:2px;width:885px;">
                            <pre id="output"></pre>
                         </div>
                      </div>
