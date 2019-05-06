@@ -1,40 +1,14 @@
-<!-- <script>
-            function output(){
-	            //https://www.w3schools.com/php/php_ajax_php.asp
-                //https://stackoverflow.com/questions/24468459/sending-a-json-to-server-and-retrieving-a-json-in-return-without-jquery
-	            //https://stackoverflow.com/questions/18441375/submit-form-field-values-to-a-javascript-function
-                var xmlhttp = new XMLHttpRequest();
-                var input = document.getElementById("topicin").value;
-	            xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var text = null;
-                        text = this.responseText;
-                        text = JSON.parse(text);
-                        var output = "Highly matched topics is: \n";
-                        if(text != null){
-                            var t = text.topics;
-                            console.dir(t[0]);
-                            for (var i = 0; i < t.length; i++){
-                                    var detail = t[i];
-                                    //console.dir(t[i]);
-                                    output = output.concat('   TOPIC ', detail.id, ' : ', detail.summary, ' \n');
-                                    output = output.concat('      SUGGESTED TOOLS: ', detail.tools, ' \n');
-                                    output = output.concat('      SUGGESTED DATASETS: ', detail.datasets, '\n');
+     <style>
+         table, th, td{
+            border: 1px solid black;
+            border-collapse: collapse;
+         }
+         th, td{
+            padding: 5px;
+         }
 
-                            }
-                        }
-                        document.getElementById("output").innerHTML = output;
-                    }
-                };
-                var text = JSON.stringify({"text": input});
-                xmlhttp.open("POST", "http://54.173.2.13:9000/api/topics", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/json");
-                xmlhttp.send(text);
-            }
-   </script>  -->
-
-  
-   <script>
+     </style>
+     <script>
                //References:
 	            //https://www.w3schools.com/php/php_ajax_php.asp
                //https://stackoverflow.com/questions/24468459/sending-a-json-to-server-and-retrieving-a-json-in-return-without-jquery
@@ -82,13 +56,21 @@
                medinria:	'https://med.inria.fr/',
                statsoft:	'https://www.statsoft.com/',
                neuronsim:	'https://www.neuron.yale.edu/neuron/',
-               cplusplus:	'https://www.cplusplus.com',
+               cplusplus:	'http://www.cplusplus.com',
                bluepyopt:	'https://bluepyopt.readthedocs.io',
                bootwptos:	'https://rdrr.io/cran/BootWPTOS/',
                freesurfer:	'https://surfer.nmr.mgh.harvard.edu/',
                edfbrowser:	'https://www.teuniz.net/edfbrowser/',
                tensorflow:	'https://www.tensorflow.org/',
                matplotlib:	'https://matplotlib.org/'
+            };
+            var dataset = { 
+               excitatory: 'https://en.wikipedia.org/wiki/Excitatory_synapse',
+               inhibitory: 'https://en.wikipedia.org/wiki/Inhibitory_postsynaptic_potential',
+               circuit:    'https://en.wikipedia.org/wiki/Neural_circuit',
+               granule:    'https://en.wikipedia.org/wiki/Granule_cell',
+               mitral:     'https://en.wikipedia.org/wiki/Mitral_valve',
+               purkinje:   'https://en.wikipedia.org/wiki/Purkinje_cell'
             };
             function output(){
              
@@ -99,24 +81,118 @@
                         var text = null;
                         text = this.responseText;
                         text = JSON.parse(text);
-                        var output = "Here is the tools and datasets we found relevant to your topic: \n";
-                        output = output.concat('Click on the link on each tool to learn more about them \n');
-                        if(text != null){
-                            var t = text.topics;
-                            var detail = t[0];
-                            var temp = detail.tools;
-                            temp = temp.split(",");
-                            var keys = Object.keys(tool);
-                            for(var i = 0; i < temp.length;i++){
-                               for(var j = 0; j < keys.length;j++){
-                                  if(temp[i] == keys[j]){
-                                     console.log('equal');
-                                     temp[i] = '<a href='+tool[keys[j]]+'>'+temp[i]+'</a>';
-                                  }
-                               }
-                            }
-                            output = output.concat('  SUGGESTED TOOLS: ', temp, ' \n');
-                            output = output.concat('  SUGGESTED DATASETS: ', detail.datasets, '\n');
+                        var output = "Here is the tools and datasets we found relevant to your topic: \n\n";
+                        if (input == 'neuron simulation'){
+                           if(text != null){
+                              var t = text.topics;
+                              var detail = t[0];
+                              output = output.concat('SUGGESTED TOOLS: \n');
+                              output = output.concat('<table><tr><th>Tool Name</th><th>Description</th><th>Link</th></tr>');
+                              //tools table
+                              var to = detail.tools;
+                              to = to.split(",");
+                              var key1 = Object.keys(tool);
+                              var link = [];
+                              for(var i = 0; i < to.length;i++){
+                                 for(var j = 0; j < key1.length;j++){
+                                    if(to[i] == key1[j]){
+                                       link[i] = '<a href='+tool[key1[j]]+'>'+tool[key1[j]]+'</a>';
+                                    }
+                                 }
+                              }
+                              output = output.concat('<tr><td>',to[0],'</td><td>Simulation for building and\nusing computational model of neurons</td><td>',link[0],'</td></tr>');
+                              output = output.concat('<tr><td>',to[1],'</td><td>General purpose programming\nlanguage</td><td>',link[1],'</td></tr>');
+                              output = output.concat('<tr><td>',to[2],'</td><td>Multi-paradigm numerical computing\nenviroment and proprietary programming language</td><td>',link[2],'</td></tr></table>\n\n');
+                              
+                              
+                              output = output.concat('SUGGESTED DATASETS: \n');
+                              output = output.concat('<table><tr><th>Dataset Name</th><th>Description</th><th>Link</th></tr>');
+                              //datasets table
+                              var da = detail.datasets;
+                              da = da.split(",");
+                              var key2 = Object.keys(dataset);
+                              for(var i = 0; i < da.length;i++){
+                                 for(var j = 0; j < key2.length;j++){
+                                    if(da[i] == key2[j]){
+                                       link[i] = '<a href='+dataset[key2[j]]+'>'+dataset[key2[j]]+'</a>';
+                                    }
+                                 }
+                              }
+                              output = output.concat('<tr><td>',da[0],'</td><td>Synapse in which action potential\nin a presynapse neuron increase probability\nof action potential occuring in postsynaptic cell</td><td>',link[0],'</td></tr>');
+                              output = output.concat('<tr><td>',da[1],'</td><td>Kind of synaptic potential that\nmakes a postsynaptic neuron less likely to\ngenerate an action potential</td><td>',link[1],'</td></tr>');
+                              output = output.concat('<tr><td>',da[2],'</td><td>Population of neurons interconnected\nby synapses to carry out a specific function\nwhen activated</td><td>',link[2],'</td></tr></table>');  
+                              
+                           }
+                        }else if (input == 'brain cell'){
+                           if(text != null){
+                              var t = text.topics;
+                              var detail = t[0];
+                              output = output.concat('SUGGESTED TOOLS: \n');
+                              output = output.concat('<table><tr><th>Tool Name</th><th>Description</th><th>Link</th></tr>');
+                              //tools table
+                              var to = detail.tools;
+                              to = to.split(",");
+                              var key1 = Object.keys(tool);
+                              var link = [];
+                              for(var i = 0; i < to.length;i++){
+                                 for(var j = 0; j < key1.length;j++){
+                                    if(to[i] == key1[j]){
+                                       link[i] = '<a href='+tool[key1[j]]+'>'+tool[key1[j]]+'</a>';
+                                    }
+                                 }
+                              }
+                              output = output.concat('<tr><td>',to[0],'</td><td>Multi-paradigm numerical computing\nenviroment and proprietary programming language</td><td>',link[0],'</td></tr>');
+                              output = output.concat('<tr><td>',to[1],'</td><td>Simulator for spiking neural\nnetwork</td><td>',link[1],'</td></tr>');
+                              output = output.concat('<tr><td>',to[2],'</td><td>Opensource Matlab toolbox\nfor physiological research</td><td>',link[2],'</td></tr></table>\n\n');
+                              
+                              
+                              output = output.concat('SUGGESTED DATASETS: \n');
+                              output = output.concat('<table><tr><th>Dataset Name</th><th>Description</th><th>Link</th></tr>');
+                              //datasets table
+                              var da = detail.datasets;
+                              da = da.split(",");
+                              var key2 = Object.keys(dataset);
+                              for(var i = 0; i < da.length;i++){
+                                 for(var j = 0; j < key2.length;j++){
+                                    if(da[i] == key2[j]){
+                                       link[i] = '<a href='+dataset[key2[j]]+'>'+dataset[key2[j]]+'</a>';
+                                    }
+                                 }
+                              }
+                              output = output.concat('<tr><td>',da[0],'</td><td>Cells that account for the majority\nof neurons in the human brain</td><td>',link[0],'</td></tr>');
+                              output = output.concat('<tr><td>',da[1],'</td><td>Valve that let blood flow from one\nchamber of the heart, the left atrium, the another, left ventricle</td><td>',link[1],'</td></tr>');
+                              output = output.concat('<tr><td>',da[2],'</td><td>Cells that make up class GABAergic\nlocated in the cerebellum</td><td>',link[2],'</td></tr></table>');  
+                              
+                           }
+                        }else{
+                           if(text != null){
+                              var t = text.topics;
+                              var detail = t[0];
+                              //tools table
+                              var to = detail.tools;
+                              to = to.split(",");
+                              var key1 = Object.keys(tool);
+                              for(var i = 0; i < to.length;i++){
+                                 for(var j = 0; j < key1.length;j++){
+                                    if(to[i] == key1[j]){
+                                       to[i] = '<a href='+tool[key1[j]]+'>'+to[i]+'</a>';
+                                    }
+                                 }
+                              }
+                              //datasets table
+                              var da = detail.datasets;
+                              da = da.split(",");
+                              var key2 = Object.keys(dataset);
+                              for(var i = 0; i < da.length;i++){
+                                 for(var j = 0; j < key2.length;j++){
+                                    if(da[i] == key2[j]){
+                                       da[i] = '<a href='+dataset[key2[j]]+'>'+da[i]+'</a>';
+                                    }
+                                 }
+                              }
+                              output = output.concat('  SUGGESTED TOOLS: ', to, ' \n');
+                              output = output.concat('  SUGGESTED DATASETS: ', da, '\n');
+                           }
                         }
                         document.getElementById("output").innerHTML = output;
                     }
@@ -153,8 +229,6 @@
                <div class="form-group row ">
                      <div class="col-md-3">
                         <label for="jobname" class=" col-form-label">Input</label>
-                     </div>
-                     <div class="col-md-7">
                         <input type="text" class="form-control" id="topicin" name="appname" value = ""/>
                      </div>
                </div>
@@ -162,12 +236,9 @@
                <div class="form-group row ">
                      <div class="col-md-3">
                         <label for="jobname" class=" col-form-label">Output</label>
-                     </div>
-                     <div class="col-md-7">
-                        <div style="border:1px solid black;padding:2px;width:700px;height:200px;">
+                        <div style="border:1px solid black;padding:2px;width:900px;">
                            <pre id="output"></pre>
                         </div>
-                        <!-- <textarea rows="4" cols="50" id="output"></textarea> -->
                      </div>
                </div>
                <div class="form-group row " style="float: right;">
