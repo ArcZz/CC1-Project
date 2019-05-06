@@ -410,6 +410,12 @@ td.gold{
 	padding: 0px !important;
     margin: 0px;
 }
+
+.loader.green{
+	border: .25em solid #26b67c;
+	border-right-color: transparent;
+
+}
 .loader {
  border: .25em solid #F1B82D;
     border-radius: 50%;

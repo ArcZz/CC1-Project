@@ -84,11 +84,19 @@ Route::get('/system/recommender/template_recommender', 'System\Recommender\TempR
 Route::get('/project/jupyter', 'System\Project\TaskController@jupyterRecNotebook')->name('system.project.jupRec');
 
 
+
+
+
+
 Route::post('/allocateResources','System\Recommender\TempRecomController@allocateResources');
 
 Route::post('/callOptimizer','System\Recommender\TempRecomController@callOptimizer');
 
 Route::post('/checkStatus','System\Recommender\TempRecomController@checkStatus');
+Route::post('/uploadFile','System\Recommender\TempRecomController@uploadFile');
+Route::post('/downloadFile','System\Recommender\TempRecomController@downloadFile');
+
+
 
 
 
