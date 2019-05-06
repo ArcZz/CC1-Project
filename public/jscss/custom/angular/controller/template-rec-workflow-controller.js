@@ -1,7 +1,35 @@
+$screenID = '';
+
 system_app.controller('recommender-workflow', function ($scope, $http, $window, $sce) {
-
+	
 	$scope.recomm_section = 'recommendersystems';
+	$scope.child = {} ;
+	
+	$scope.openRecommender = function (recommender_section) {
+		$scope.recomm_section = recommender_section;
+		$scope.classActive = [];
+		$scope.classActive[recommender_section] = 'active';
 
+		if (recommender_section == 'template_recommender') {
+			$scope.child.visibleSection = 'firstpage';
+			$screenID = 'firstpage';
+		}
+	}
+	
+	$scope.openMainPageRecommender = function () {
+		$scope.recomm_section ='recommendersystems';
+		$scope.classActive = [];
+	}
+
+
+});
+
+
+system_app.controller('temp-recommender-workflow', function ($scope, $http, $window, $sce) {
+
+
+	var parentScope = $scope.$parent;
+	parentScope.child = $scope;
 
 	$scope.clouddetails = {};
 	$scope.req_operatingsystem = function (operating_system) {
@@ -26,15 +54,7 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 		console.log($scope.clouddetails);
 	}
  
-	$scope.openRecommender = function (recommender_section) {
-		$scope.recomm_section = recommender_section;
-		$scope.classActive = [];
-		$scope.classActive[recommender_section] = 'active';
-
-		if (recommender_section == 'template_recommender') {
-			$scope.visibleSection = 'temprecomdstep1';
-		}
-	}
+	
 
 	$scope.callOptimizer = function (clouddetails) {
 
@@ -48,18 +68,19 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 				'Content-Type': 'json',
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
-			data: clouddetails
+			params: {"clouddetails" : clouddetails}
 
 		}
 
 
-		$http(req).then(function (responseText) {
-			console.log(responseText.data.msg);
-			var response = JSON.parse(responseText.data.msg);
+		/*$http(req).then(function (response) {
+			console.log(response);
+			//var response = JSON.parse(responseText);
 
 			if (response.status == 200) {
 
 				$scope.visibleSection = 'temprecomdstep2';
+				$screenID = 'temprecomdstep2';
 				var cloudTemplateSuggetion = response.data;
 				$scope.cloudTemplateSuggetion = cloudTemplateSuggetion;
 				 
@@ -68,7 +89,27 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 			}
 
 
-		});
+		});*/
+		
+		$http(req).then(function (response) {
+			console.log(response);
+			var response = JSON.parse(response.data.data);
+			
+			if (response.status == 200) {
+
+				$scope.visibleSection = 'temprecomdstep2';
+								$screenID = 'temprecomdstep2';
+
+				var cloudTemplateSuggetion = response.data;
+				$scope.cloudTemplateSuggetion = cloudTemplateSuggetion;
+				 
+			} else {
+				alert("Issue with API");
+			}
+
+
+		}); 
+		
 
 
 	}
@@ -103,7 +144,9 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 	$scope.selectTemplate = function(cloudTemplate ,is_popup){
 		
 		$scope.visibleSection = 'temprecomdstep4';
-
+		
+		$screenID = 'temprecomdstep4';
+		
 		var type_cloud = [];
 		var  instances = cloudTemplate.instances;
 		for (key_cloud in instances) {
@@ -143,13 +186,39 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 		$http(req).then(function (data) {
 			console.log(data);
 			$scope.visibleSection = 'temprecomdstep3';
+			$screenID = 'temprecomdstep3';
+
 			
 		});
 		
 		
 
 	}
+	$scope.loader_status=false;
+	$scope.link_text='Check Status';
+	
+	$scope.downloadFile = function(){
+		var req = {
+				method: 'POST',
+				url: '/downloadFile',
+				headers: {
+					'Content-Type': 'json',
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+
+			}
+
+			$http(req).then(function (response) {
+				alert('check output folder');
+				//alert(1);
+				//$scope.visibleSection = 'temprecomdstep3;
+				
+			});
+	}
+	
 	$scope.checkStatus = function(){
+		$scope.output_status='';
+		$scope.loader_status=true;
 		var req = {
 				method: 'POST',
 				url: '/checkStatus',
@@ -160,13 +229,18 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 
 			}
 
-			$http(req).then(function (data) {
-				console.log(data);
-				alert(1);
+			$http(req).then(function (response) {
+				console.log(response.data);
+				$scope.loader_status=false;
+				$scope.output_status = response.data.msg
+				$scope.link_text='Refresh Status';
+				//alert(1);
 				//$scope.visibleSection = 'temprecomdstep3;
 				
 			});
 	}
+	
+	
 
 	$scope.proceed = function () {
 
@@ -178,6 +252,7 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 		} else if ($scope.workflowtype.name == 'temprecomd') {
 
 			$scope.visibleSection = 'temprecomdstep1';
+			$screenID = 'temprecomdstep1';
 			$scope.firstSection = false;
 			$scope.errorworkflowtype = false;
 
@@ -191,4 +266,37 @@ system_app.controller('recommender-workflow', function ($scope, $http, $window, 
 	}
 
 
+});
+
+
+$('#upload').on('click', function(e) {
+
+    e.preventDefault();
+
+		var form_data = new FormData($("#modal_form_id")[0]);
+		
+		if(document.getElementById('img1') && document.getElementById('img1').value == ''){
+			alert("Please choose image.");
+			return false;
+		}else{
+			$.ajax({
+				url: '/uploadFile',
+				type: 'POST',              
+				processData: false,  // tell jQuery not to process the data
+				contentType: false,  // tell jQuery not to set contentType
+				data : form_data,
+
+			headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					},
+
+				success: function(result){
+					console.log('Uploaded');
+					
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
 });
