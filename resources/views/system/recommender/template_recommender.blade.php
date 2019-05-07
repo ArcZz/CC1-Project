@@ -194,7 +194,7 @@
 						<div class="alert alert-success" >
 							<p>Workflow has been submitted </p>
 							<p><a href="#"  ng-click="checkStatus();" style="text-decoration: underline;">Click Here</a> to @{{ link_text }}
-							&nbsp;&nbsp;&nbsp; <a target="_blank" download href="http://cyneuro.orgdev/jscss/custom/img/img_after"   style="text-decoration: underline;" > Download File </a>
+							&nbsp;&nbsp;&nbsp; <a target="_blank" download href="http://ec2-3-87-14-167.compute-1.amazonaws.com:8000/jscss/custom/img/img_after.png"   style="text-decoration: underline;" > Download File </a>
 							</p>
 							<div ng-show="loader_status"> <div  class="loader green" ></div> &nbsp;&nbsp;&nbsp;Checking Status   </div>
 							<p><pre style="overflow:hidden;">
