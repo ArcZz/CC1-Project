@@ -52,7 +52,7 @@
                   html = "<div>No Notebooks Found</div>"
                } else {
                   for (var x = 0; x < notebooks.length; x++ ) {
-                     book = notebooks[0]
+                     book = notebooks[x]
                      var hyperlink = "http://ec2-3-94-109-60.compute-1.amazonaws.com:8001/notebooks/" + book.filename
                      html += "<a style='color:blue;' class='junotebook' href=" + hyperlink + ">" + book.filename + "</a>"
                      html += "<br>"
