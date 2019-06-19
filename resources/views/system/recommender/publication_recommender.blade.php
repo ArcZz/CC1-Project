@@ -59,7 +59,7 @@
                 //----------------------------------------------------------------------------------------------------//
 
                 // url = "http://localhost:3002/PMID?id=" + searchKey;
-                url = "http://ec2-3-87-14-167.compute-1.amazonaws.com:3002/PMID?id=" + searchKey
+                url = "http://ec2-3-83-127-51.compute-1.amazonaws.com/PMID?id=" + searchKey
 
                 $.ajax({
                     type: 'GET',
@@ -98,7 +98,7 @@
                             for (var i = 0; i < data[0].Sim.length; i++) {
 
                                 var PMID = data[0].Sim[i];
-                                url = "http://ec2-3-87-14-167.compute-1.amazonaws.com:3002/PMID?id=" + PMID;
+                                url = "http://ec2-3-83-127-51.compute-1.amazonaws.com/PMID?id=" + PMID;
 
                                 $.ajax({
                                     type: 'GET',
@@ -160,7 +160,7 @@
                 //----------------------------------------------------------------------------------------------------//
 
                 // url = "http://localhost:3002/titles?id=" + searchKey
-                url = "http://ec2-3-87-14-167.compute-1.amazonaws.com:3002/titles?id=" + searchKey
+                url = "http://ec2-3-83-127-51.compute-1.amazonaws.com/titles?id=" + searchKey
 
                 $.ajax({
                     type: 'GET',
@@ -220,7 +220,7 @@
                 //----------------------------------------------------------------------------------------------------//
 
                 // url = "http://localhost:3002/authors?id=" + searchKey
-                url = "http://ec2-3-87-14-167.compute-1.amazonaws.com:3002/authors?id=" + searchKey;
+                url = "http://ec2-3-83-127-51.compute-1.amazonaws.com/authors?id=" + searchKey;
                 
                 $.ajax({
                     type: 'GET',
