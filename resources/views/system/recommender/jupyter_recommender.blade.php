@@ -39,7 +39,7 @@
    $(document).ready(function() {
       $('#juform').on('submit', function(event) {
          var input = parseInput($('#juin').val())
-         var url = "http://ec2-3-94-109-60.compute-1.amazonaws.com:8001/api/rec/jupyter?keyword=" + input
+         var url = "http://ec2-3-83-127-51.compute-1.amazonaws.com/api/rec/jupyter?keyword=" + input
 
          $.ajax({
             type: 'GET',
@@ -53,7 +53,7 @@
                } else {
                   for (var x = 0; x < notebooks.length; x++ ) {
                      book = notebooks[x]
-                     var hyperlink = "http://ec2-3-94-109-60.compute-1.amazonaws.com:8001/notebooks/" + book.filename
+                     var hyperlink = "http://ec2-3-83-127-51.compute-1.amazonaws.com/notebooks/" + book.filename
                      html += "<a style='color:blue;' class='junotebook' href=" + hyperlink + ">" + book.filename + "</a>"
                      html += "<br>"
                      html += "<h4>cell number: </h4>'" + book.cell_no
